@@ -6,7 +6,7 @@
     <session-factory>
         <!-- Configuración de Conexión JDBC para Base de Datos H2 en Archivo -->
         <property name="hibernate.connection.driver_class">org.h2.Driver</property>
-        <property name="hibernate.connection.url">jdbc:h2:./data/alertfiredb;DB_CLOSE_DELAY=-1;AUTO_SERVER=TRUE</property>
+        <property name="hibernate.connection.url">jdbc:h2:./data/alerfiredb;DB_CLOSE_DELAY=-1;AUTO_SERVER=TRUE</property>
         <property name="hibernate.connection.username">sa</property>
         <property name="hibernate.connection.password"></property>
 
@@ -21,14 +21,14 @@
         <property name="hibernate.hbm2ddl.auto">update</property>
 
         <!-- Mapeo de Entidades JPA -->
-        <mapping class="ec.edu.epn.firealert.model.Usuario"/>
-        <mapping class="ec.edu.epn.firealert.model.Ciudadano"/>
-        <mapping class="ec.edu.epn.firealert.model.Bombero"/>
-        <mapping class="ec.edu.epn.firealert.model.Incendio"/>
-        <mapping class="ec.edu.epn.firealert.model.Evidencia"/>
-        <mapping class="ec.edu.epn.firealert.model.HistorialEstado"/>
-        <mapping class="ec.edu.epn.firealert.model.ZonaSegura"/>
-        <mapping class="ec.edu.epn.firealert.model.RutaEvacuacion"/>
-        <mapping class="ec.edu.epn.firealert.model.Notificacion"/>
+        <mapping class="ec.edu.epn.alerfire.model.Usuario"/>
+        <mapping class="ec.edu.epn.alerfire.model.Ciudadano"/>
+        <mapping class="ec.edu.epn.alerfire.model.Bombero"/>
+        <mapping class="ec.edu.epn.alerfire.model.Incendio"/>
+        <mapping class="ec.edu.epn.alerfire.model.Evidencia"/>
+        <mapping class="ec.edu.epn.alerfire.model.HistorialEstado"/>
+        <mapping class="ec.edu.epn.alerfire.model.ZonaSegura"/>
+        <mapping class="ec.edu.epn.alerfire.model.RutaEvacuacion"/>
+        <mapping class="ec.edu.epn.alerfire.model.Notificacion"/>
     </session-factory>
 </hibernate-configuration>

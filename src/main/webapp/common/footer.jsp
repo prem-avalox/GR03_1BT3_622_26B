@@ -4,7 +4,7 @@
         <div class="row align-items-center">
             <div class="col-md-6 mb-3 mb-md-0">
                 <h6 class="fw-bold text-danger d-flex align-items-center">
-                    <i class="bi bi-shield-shaded me-2"></i> FireAlert - Sistema de Alerta y Evacuación de Incendios
+                    <i class="bi bi-shield-shaded me-2"></i> AlerFire - Sistema de Alerta y Evacuación de Incendios
                 </h6>
                 <p class="small text-muted mb-1">
                     Escuela Politécnica Nacional — Metodologías Ágiles de Desarrollo de Software (622_26B)

@@ -5,7 +5,7 @@
     <div class="container">
         <a class="navbar-brand fw-bold d-flex align-items-center" href="${pageContext.request.contextPath}/home">
             <i class="bi bi-fire fs-3 me-2 text-warning"></i>
-            <span>FireAlert <span class="badge bg-dark fs-6 ms-1">GR03_1BT3</span></span>
+            <span>AlerFire <span class="badge bg-dark fs-6 ms-1">GR03_1BT3</span></span>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
                 aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">

@@ -5,7 +5,7 @@
                              http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
-    <display-name>GR03_1BT3_622_26B - Fire Alert</display-name>
+    <display-name>GR03_1BT3_622_26B - AlerFire</display-name>
 
     <welcome-file-list>
         <welcome-file>home</welcome-file>

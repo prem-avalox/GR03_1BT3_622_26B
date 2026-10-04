@@ -1,11 +1,11 @@
-# Proyecto GR03_1BT3_622_26B: FireAlert — Sistema de Alerta Temprana y Evacuación de Incendios
+# Proyecto GR03_1BT3_622_26B: AlerFire — Sistema de Alerta Temprana y Evacuación de Incendios
 
-Este repositorio contiene la implementación práctica del sistema **FireAlert**, correspondiente a la **Tarea 3 / Sprint 1** de la materia **Metodologías Ágiles de Desarrollo de Software (622_26B)** de la Escuela Politécnica Nacional.
+Este repositorio contiene la implementación práctica del sistema **AlerFire**, correspondiente a la **Tarea 3 / Sprint 1** de la materia **Metodologías Ágiles de Desarrollo de Software (622_26B)** de la Escuela Politécnica Nacional.
 
 ---
 
 ## 📌 Descripción del Proyecto
-**FireAlert** es una plataforma web desarrollada bajo el patrón arquitectónico **Modelo - Vista - Controlador (MVC)** en Java EE. Facilita la notificación comunitaria ante conatos de incendios forestales y urbanos, el seguimiento y actualización de estados operativos por parte del Cuerpo de Bomberos, la visualización geoespacial en tiempo real y el cálculo de rutas seguras de evacuación evaluando el nivel de riesgo frente a los focos activos.
+**AlerFire** es una plataforma web desarrollada bajo el patrón arquitectónico **Modelo - Vista - Controlador (MVC)** en Java EE. Facilita la notificación comunitaria ante conatos de incendios forestales y urbanos, el seguimiento y actualización de estados operativos por parte del Cuerpo de Bomberos, la visualización geoespacial en tiempo real y el cálculo de rutas seguras de evacuación evaluando el nivel de riesgo frente a los focos activos.
 
 La aplicación utiliza persistencia mediante **Hibernate ORM con JPA** y la base de datos embebida **H2 Database en modo archivo**, lo que garantiza que no se requiere instalar ni configurar motores externos de base de datos para ejecutar y calificar el proyecto.
 
@@ -22,7 +22,7 @@ GR03_1BT3_622_26B/
 ├── src/
 │   └── main/
 │       ├── java/
-│       │   └── ec/edu/epn/firealert/
+│       │   └── ec/edu/epn/alerfire/
 │       │       ├── model/                            # CAPA MODELO (Entidades JPA)
 │       │       │   ├── Usuario.java                  # Clase base de usuarios
 │       │       │   ├── Ciudadano.java                # Rol Ciudadano (CU1, CU3, CU4)
@@ -80,7 +80,7 @@ GR03_1BT3_622_26B/
 2. **Controlador:** Java Servlets (`javax.servlet.http.HttpServlet`) siguiendo el patrón PRG (Post/Redirect/Get).
 3. **Vista:** JavaServer Pages (JSP) con JSTL, estilizado con **Bootstrap 5**, Bootstrap Icons y mapas interactivos con **Leaflet / OpenStreetMap**.
 4. **ORM (Mapeo Objeto-Relacional):** Hibernate ORM 5.6 (`org.hibernate:hibernate-core`) con anotaciones estándar de JPA.
-5. **Base de Datos:** H2 Database Engine 2.2 embebida en archivo (`jdbc:h2:./data/alertfiredb`). Se inicializa de forma automática con datos georreferenciados de Quito (La Carolina, El Ejido, Guápulo, Bellavista).
+5. **Base de Datos:** H2 Database Engine 2.2 embebida en archivo (`jdbc:h2:./data/alerfiredb`). Se inicializa de forma automática con datos georreferenciados de Quito (La Carolina, El Ejido, Guápulo, Bellavista).
 6. **Servidor Embebido:** Jetty Maven Plugin para levantamiento en un solo paso.
 7. **Gestor de Construcción:** Apache Maven 3.8+.
 
