@@ -3,6 +3,7 @@ package ec.edu.epn.alerfire.servlet;
 import ec.edu.epn.alerfire.model.Incendio;
 import ec.edu.epn.alerfire.model.ZonaSegura;
 import ec.edu.epn.alerfire.service.GestorMapa;
+import ec.edu.epn.alerfire.util.DataInitializer;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,10 +28,14 @@ public class MapaServlet extends HttpServlet {
     public void init() throws ServletException {
         super.init();
         this.gestorMapa = new GestorMapa();
+        DataInitializer.inicializarDatos();
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        // Asegurar que la BD contenga los datos semilla
+        DataInitializer.inicializarDatos();
+
         // abrirPantalla() y listarIncendiosActivos()
         List<Incendio> activos = gestorMapa.listarIncendiosActivos();
         List<ZonaSegura> zonasSeguras = gestorMapa.obtenerZonasSeguras();

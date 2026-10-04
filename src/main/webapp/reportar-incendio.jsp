@@ -77,7 +77,7 @@
                             <label for="archivoUrl" class="form-label fw-semibold">URL o Enlace de la Fotografía/Video</label>
                             <input type="text" class="form-control" id="archivoUrl" name="archivoUrl"
                                    placeholder="https://ejemplo.com/evidencia.jpg o /uploads/foto1.png"
-                                   value="https://images.unsplash.com/photo-1542385151-efd9000785a0?w=600">
+                                   value="images/incendio-guapulo.jpg">
                             <div class="form-text">
                                 Ingrese una URL de imagen o deje el enlace de prueba predeterminado.
                             </div>

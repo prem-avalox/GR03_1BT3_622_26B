@@ -6,6 +6,7 @@ import ec.edu.epn.alerfire.model.Ubicacion;
 import ec.edu.epn.alerfire.model.ZonaSegura;
 import ec.edu.epn.alerfire.service.GestorEvacuacion;
 import ec.edu.epn.alerfire.service.ServicioGPS;
+import ec.edu.epn.alerfire.util.DataInitializer;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,10 +33,13 @@ public class EvacuacionServlet extends HttpServlet {
         super.init();
         this.gestorEvacuacion = new GestorEvacuacion();
         this.servicioGPS = new ServicioGPS();
+        DataInitializer.inicializarDatos();
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        DataInitializer.inicializarDatos();
+
         String latStr = req.getParameter("lat");
         String lngStr = req.getParameter("lng");
         String dir = req.getParameter("direccion");

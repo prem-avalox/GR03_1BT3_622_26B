@@ -165,7 +165,9 @@
                                     <td>
                                         <c:choose>
                                             <c:when test="${not empty inc.evidencias}">
-                                                <a href="${inc.evidencias[0].archivoUrl}" target="_blank" class="btn btn-sm btn-outline-secondary">
+                                                <c:set var="evUrl" value="${inc.evidencias[0].archivoUrl}" />
+                                                <c:set var="srcImg" value="${evUrl.startsWith('http://') || evUrl.startsWith('https://') ? evUrl : pageContext.request.contextPath.concat('/').concat(evUrl)}" />
+                                                <a href="${srcImg}" target="_blank" class="btn btn-sm btn-outline-secondary">
                                                     <i class="bi bi-image"></i> Ver Foto (${inc.evidencias.size()})
                                                 </a>
                                             </c:when>

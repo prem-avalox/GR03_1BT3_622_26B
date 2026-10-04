@@ -4,6 +4,7 @@ import ec.edu.epn.alerfire.dao.IncendioDAO;
 import ec.edu.epn.alerfire.dao.ZonaSeguraDAO;
 import ec.edu.epn.alerfire.model.Incendio;
 import ec.edu.epn.alerfire.model.ZonaSegura;
+import ec.edu.epn.alerfire.util.DataInitializer;
 
 import java.util.List;
 
@@ -24,13 +25,16 @@ public class GestorMapa {
     public GestorMapa() {
         this.incendioDAO = new IncendioDAO();
         this.zonaSeguraDAO = new ZonaSeguraDAO();
+        DataInitializer.inicializarDatos();
     }
 
     public List<Incendio> listarIncendiosActivos() {
+        DataInitializer.inicializarDatos();
         return incendioDAO.listarActivos();
     }
 
     public List<ZonaSegura> obtenerZonasSeguras() {
+        DataInitializer.inicializarDatos();
         return zonaSeguraDAO.listarTodas();
     }
 

@@ -60,7 +60,7 @@ public class DataInitializer {
                     ciudadano1);
             inc1.setFechaHora(LocalDateTime.now().minusHours(2));
             inc1.setEstado(EstadoIncendio.NO_CONTROLADO);
-            inc1.agregarEvidencia(new Evidencia("https://images.unsplash.com/photo-1542385151-efd9000785a0?w=600", TipoEvidencia.FOTO));
+            inc1.agregarEvidencia(new Evidencia("images/incendio-guapulo.jpg", TipoEvidencia.FOTO));
             inc1.getHistorial().add(new HistorialEstado(EstadoIncendio.REPORTADO, EstadoIncendio.NO_CONTROLADO, bombero1, inc1,
                     "Vientos fuertes del oriente complican labores iniciales. Se solicita apoyo de tanqueros."));
             incendioDAO.guardar(inc1);
@@ -70,7 +70,7 @@ public class DataInitializer {
                     ciudadano1);
             inc2.setFechaHora(LocalDateTime.now().minusHours(4));
             inc2.setEstado(EstadoIncendio.EN_PROCESO_DE_ATENCION);
-            inc2.agregarEvidencia(new Evidencia("https://images.unsplash.com/photo-1602980085566-48c5c56c7d3d?w=600", TipoEvidencia.FOTO));
+            inc2.agregarEvidencia(new Evidencia("images/incendio-bellavista.jpg", TipoEvidencia.FOTO));
             inc2.getHistorial().add(new HistorialEstado(EstadoIncendio.REPORTADO, EstadoIncendio.EN_PROCESO_DE_ATENCION, bombero1, inc2,
                     "Unidad B1 desplegando líneas de ataque con espuma."));
             incendioDAO.guardar(inc2);

@@ -103,7 +103,10 @@
                             <div class="card-body p-3">
                                 <div class="d-flex justify-content-between align-items-center mb-2">
                                     <span class="badge ${status.index == 0 ? 'bg-success' : 'bg-secondary'}">
-                                        ${status.index == 0 ? 'Opción Recomendada' : 'Alternativa ' + (status.index + 1)}
+                                        <c:choose>
+                                            <c:when test="${status.index == 0}">Opción Recomendada</c:when>
+                                            <c:otherwise>Alternativa ${status.index + 1}</c:otherwise>
+                                        </c:choose>
                                     </span>
                                     <span class="${ruta.nivelRiesgoBadge} px-2 py-1">
                                         Riesgo: ${ruta.nivelRiesgo} / 10 (${ruta.nivelRiesgoTexto})

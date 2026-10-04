@@ -48,7 +48,8 @@ public class Evidencia implements Serializable {
         return urlLower.endsWith(".jpg") || urlLower.endsWith(".jpeg") ||
                urlLower.endsWith(".png") || urlLower.endsWith(".webp") ||
                urlLower.endsWith(".mp4") || urlLower.startsWith("http://") ||
-               urlLower.startsWith("https://") || urlLower.startsWith("/uploads/");
+               urlLower.startsWith("https://") || urlLower.startsWith("/uploads/") ||
+               urlLower.startsWith("images/") || urlLower.startsWith("/images/");
     }
 
     public Long getId() {
