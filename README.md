@@ -122,9 +122,9 @@ GR03_1BT3_622_26B/
 
 ---
 
-## 👥 Integrantes — Grupo 03
-* Barahona Lisbeth
-* Calva Daniela
-* Dávalos Martín
-* Quimbiulco Mateo
-* Vinocunga Patricia
+## 👥 Integrantes — Grupo 03 (GR2SW)
+* Alquinga Galarza María Fernanda (maria.alquinga@epn.edu.ec)
+* Cóndor Lema Nayia Danae (nayia.condor@epn.edu.ec)
+* Dávalos Cedeño Martín Alejandro (martin.davalos@epn.edu.ec)
+* Minayo Gualotuña Anthony Joel (anthony.miayo@epn.edu.ec)
+* Rochina Llumitaxi Adayely Marley (adayely.rochina@epn.edu.ec)

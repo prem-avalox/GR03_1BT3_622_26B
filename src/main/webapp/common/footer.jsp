@@ -14,12 +14,12 @@
                 </p>
             </div>
             <div class="col-md-6 text-md-end">
-                <p class="small mb-1 text-light fw-semibold">Grupo 03:</p>
-                <span class="badge bg-secondary me-1">Barahona L.</span>
-                <span class="badge bg-secondary me-1">Calva D.</span>
+                <p class="small mb-1 text-light fw-semibold">Grupo 03 — GR2SW:</p>
+                <span class="badge bg-secondary me-1">Alquinga M.</span>
+                <span class="badge bg-secondary me-1">Cóndor N.</span>
                 <span class="badge bg-secondary me-1">Dávalos M.</span>
-                <span class="badge bg-secondary me-1">Quimbiulco M.</span>
-                <span class="badge bg-secondary">Vinocunga P.</span>
+                <span class="badge bg-secondary me-1">Minayo A.</span>
+                <span class="badge bg-secondary">Rochina A.</span>
             </div>
         </div>
     </div>
