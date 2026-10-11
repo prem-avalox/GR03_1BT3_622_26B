@@ -27,9 +27,9 @@ public class RutaEvacuacion implements Serializable {
 
     @Embedded
     @AttributeOverrides({
-        @AttributeOverride(name = "latitud", column = @Column(name = "origen_lat")),
-        @AttributeOverride(name = "longitud", column = @Column(name = "origen_lng")),
-        @AttributeOverride(name = "direccion", column = @Column(name = "origen_dir"))
+            @AttributeOverride(name = "latitud", column = @Column(name = "origen_lat")),
+            @AttributeOverride(name = "longitud", column = @Column(name = "origen_lng")),
+            @AttributeOverride(name = "direccion", column = @Column(name = "origen_dir"))
     })
     private Ubicacion origen;
 
@@ -66,6 +66,19 @@ public class RutaEvacuacion implements Serializable {
             puntos.add(zonaSeguraDestino.getUbicacion());
         }
         return puntos;
+    }
+
+    /**
+     * Calcula la menor distancia entre los extremos de la ruta
+     * (origen/destino) y un punto geográfico dado.
+     */
+    public double calcularDistanciaMinima(Ubicacion punto) {
+        if (punto == null) return 10.0;
+        double distOrigen = (this.origen != null) ? this.origen.distancia(punto) : 10.0;
+        Ubicacion destino = (this.zonaSeguraDestino != null)
+                ? this.zonaSeguraDestino.getUbicacion() : null;
+        double distDestino = (destino != null) ? destino.distancia(punto) : 10.0;
+        return Math.min(distOrigen, distDestino);
     }
 
     public String getNivelRiesgoTexto() {
