@@ -74,15 +74,11 @@ public class GestorEvacuacion {
         }
 
         double riesgoBase = 1.0;
-        Ubicacion destino = (ruta.getZonaSeguraDestino() != null) ? ruta.getZonaSeguraDestino().getUbicacion() : null;
 
         for (Incendio inc : incendiosActivos) {
             if (inc.getUbicacion() == null) continue;
 
-            // Distancia del incendio al origen y al destino
-            double distOrigen = (ruta.getOrigen() != null) ? ruta.getOrigen().distancia(inc.getUbicacion()) : 10.0;
-            double distDestino = (destino != null) ? destino.distancia(inc.getUbicacion()) : 10.0;
-            double menorDistancia = Math.min(distOrigen, distDestino);
+            double menorDistancia = ruta.calcularDistanciaMinima(inc.getUbicacion());
 
             // Si el incendio está a menos de 1 km, riesgo muy alto
             if (menorDistancia < 1.0) {
