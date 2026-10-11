@@ -48,24 +48,12 @@ public class ReporteServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         String descripcion = req.getParameter("descripcion");
-        String latStr = req.getParameter("latitud");
-        String lngStr = req.getParameter("longitud");
-        String direccion = req.getParameter("direccion");
-        String tipoEvidenciaStr = req.getParameter("tipoEvidencia");
-        String archivoUrl = req.getParameter("archivoUrl");
 
         try {
-            double lat = (latStr != null && !latStr.isEmpty()) ? Double.parseDouble(latStr) : -0.180653;
-            double lng = (lngStr != null && !lngStr.isEmpty()) ? Double.parseDouble(lngStr) : -78.467838;
-            Ubicacion ubicacion = new Ubicacion(lat, lng, direccion != null ? direccion : "Ubicación reportada");
+            // Llamadas limpias a los métodos extraídos
+            Ubicacion ubicacion = extraerUbicacion(req);
+            List<Evidencia> evidencias = extraerEvidencias(req);
 
-            List<Evidencia> evidencias = new ArrayList<>();
-            if (archivoUrl != null && !archivoUrl.trim().isEmpty()) {
-                TipoEvidencia tipo = "VIDEO".equalsIgnoreCase(tipoEvidenciaStr) ? TipoEvidencia.VIDEO : TipoEvidencia.FOTO;
-                evidencias.add(new Evidencia(archivoUrl.trim(), tipo));
-            }
-
-            // Invocación al Gestor del caso de uso
             Incendio reporteCreado = gestorReportes.crearReporte(null, evidencias, descripcion, ubicacion);
 
             if (reporteCreado != null) {
@@ -86,4 +74,36 @@ public class ReporteServlet extends HttpServlet {
             doGet(req, resp);
         }
     }
+
+    /**
+     * extrae y construye la Ubicacion a partir de los parámetros de la petición HTTP.
+     */
+    private Ubicacion extraerUbicacion(HttpServletRequest req) {
+        String latStr = req.getParameter("latitud");
+        String lngStr = req.getParameter("longitud");
+        String direccion = req.getParameter("direccion");
+
+        double lat = (latStr != null && !latStr.isEmpty()) ? Double.parseDouble(latStr) : -0.180653;
+        double lng = (lngStr != null && !lngStr.isEmpty()) ? Double.parseDouble(lngStr) : -78.467838;
+        String dir = (direccion != null && !direccion.trim().isEmpty()) ? direccion : "Ubicación reportada";
+
+        return new Ubicacion(lat, lng, dir);
+    }
+
+    /**
+     * extrae y genera la lista de evidencias adjuntas en la petición HTTP.
+     */
+    private List<Evidencia> extraerEvidencias(HttpServletRequest req) {
+        String tipoEvidenciaStr = req.getParameter("tipoEvidencia");
+        String archivoUrl = req.getParameter("archivoUrl");
+        List<Evidencia> evidencias = new ArrayList<>();
+
+        if (archivoUrl != null && !archivoUrl.trim().isEmpty()) {
+            TipoEvidencia tipo = "VIDEO".equalsIgnoreCase(tipoEvidenciaStr) ? TipoEvidencia.VIDEO : TipoEvidencia.FOTO;
+            evidencias.add(new Evidencia(archivoUrl.trim(), tipo));
+        }
+        return evidencias;
+    }
+
+
 }
