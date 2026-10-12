@@ -27,3 +27,7 @@ data/
 # OS
 .DS_Store
 Thumbs.db
+
+# Carpeta local de documentacion
+documentos/
+
