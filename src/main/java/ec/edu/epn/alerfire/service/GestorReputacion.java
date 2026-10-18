@@ -14,7 +14,11 @@ import ec.edu.epn.alerfire.model.NivelConfiabilidad;
 public class GestorReputacion implements IServicioReputacion {
 
     public static final int LIMITE_FALSAS_ALARMAS = 3;
+    public static final int PUNTOS_REPORTE_VERIDICO = 50;
     public static final int PENALIZACION_FALSA_ALARMA = 100;
+    public static final int LIMITE_FALSAS_ALARMAS = 3;
+    public static final int UMBRAL_NIVEL_ORO = 300;
+    public static final int UMBRAL_NIVEL_PLATA = 100;
 
     private final ICiudadanoDAO ciudadanoDAO;
 
@@ -28,18 +32,18 @@ public class GestorReputacion implements IServicioReputacion {
 
     @Override
     public int evaluarVeracidad(Ciudadano ciudadano, boolean esVeridico) {
-        // TODO: Implementar el resto de la lógica de evaluación de CU5.
-        // Martín: +50 puntos si el reporte es verídico.
-        // Adayely: IllegalStateException si el ciudadano ya está suspendido.
-        // María Fernanda: actualizar la base de datos si ciudadanoDAO != null.
+        if (ciudadano == null) {
+            throw new IllegalArgumentException("El ciudadano no puede ser nulo");
+        }
+        if (ciudadano.isSuspendido()) {
+            throw new IllegalStateException("El ciudadano está suspendido preventivamente");
+        }
 
-        if (!esVeridico) {
-            int nuevoPuntaje = Math.max(
-                    0,
-                    ciudadano.getPuntosReputacion() - PENALIZACION_FALSA_ALARMA
-            );
+        if (esVeridico) {
+            ciudadano.setPuntosReputacion(ciudadano.getPuntosReputacion() + PUNTOS_REPORTE_VERIDICO);
+        } else {
+            int nuevoPuntaje = Math.max(0, ciudadano.getPuntosReputacion() - PENALIZACION_FALSA_ALARMA);
             ciudadano.setPuntosReputacion(nuevoPuntaje);
-
             int faltas = ciudadano.getReportesFalsos() + 1;
             ciudadano.setReportesFalsos(faltas);
 
@@ -48,21 +52,31 @@ public class GestorReputacion implements IServicioReputacion {
             }
         }
 
+        if (ciudadanoDAO != null) {
+            ciudadanoDAO.actualizar(ciudadano);
+        }
+
         return ciudadano.getPuntosReputacion();
     }
 
     @Override
     public NivelConfiabilidad clasificarNivelConfiabilidad(int puntos) {
-        // TODO: Implementar clasificación por rangos (CU6).
-        // Bronce: < 100 puntos.
-        // Plata: 100 a 299 puntos.
-        // Oro: >= 300 puntos.
-        return null;
+        public NivelConfiabilidad clasificarNivelConfiabilidad(int puntos) {
+        // FASE REFACTOR (TDD): Retornos tempranos y uso de constantes semánticas
+        if (puntos >= UMBRAL_NIVEL_ORO) {
+            return NivelConfiabilidad.ORO;
+        }
+        if (puntos >= UMBRAL_NIVEL_PLATA) {
+            return NivelConfiabilidad.PLATA;
+        }
+        return NivelConfiabilidad.BRONCE;
     }
 
     @Override
     public boolean validarAcceso(Ciudadano ciudadano) {
-        // TODO: Validar que el ciudadano no sea nulo y no esté suspendido.
+        if (ciudadano == null) {
+            return false;
+        }
         return false;
     }
 }
