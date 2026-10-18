@@ -6,14 +6,10 @@ import ec.edu.epn.alerfire.model.NivelConfiabilidad;
 /**
  * Gestor de negocio para el cálculo de reputación cívica, evaluación de reportes
  * y rangos de confiabilidad en AlerFire.
- * 
- * Casos de Uso del Incremento:
+ *
+ * Casos de Uso:
  * - CU5: Evaluar veracidad del reporte y asignar reputación.
  * - CU6: Consultar perfil de reputación y confiabilidad.
- * 
- * ESTRUCTURA BASE PARA TRABAJO EN EQUIPO (TDD):
- * Cada integrante debe escribir primero su prueba en GestorReputacionTest (Fase RED),
- * verificar que falle, y luego implementar aquí el código mínimo necesario (Fase GREEN).
  */
 public class GestorReputacion implements IServicioReputacion {
 
