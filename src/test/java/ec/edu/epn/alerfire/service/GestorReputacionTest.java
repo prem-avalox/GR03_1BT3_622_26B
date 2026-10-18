@@ -47,14 +47,11 @@ public class GestorReputacionTest {
     // =========================================================================
     @Test
     public void given_false_alarm_when_evaluate_then_reputation_decreased_with_floor_zero() {
+        ciudadano.setPuntosReputacion(60);
 
-        ciudadano.setPuntosReputacion(60); //el ciudadano empieza con 100 puntos
-        int puntosEsperados = 0;
+        gestor.evaluarVeracidad(ciudadano, false);
 
-        int resultado = gestor.evaluarVeracidad(ciudadano, false);  //se evalúa como falsa alarma
-
-        assertEquals(puntosEsperados, resultado);  //puntaje no baja del piso cero
-
+        assertEquals(0, ciudadano.getPuntosReputacion());
     }
 
     // =========================================================================
