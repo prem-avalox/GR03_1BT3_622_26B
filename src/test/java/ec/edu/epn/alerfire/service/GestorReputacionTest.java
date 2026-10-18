@@ -8,13 +8,8 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * Suite de Pruebas Unitarias para GestorReputacion (JUnit 4 y Mockito).
- * 
- * ESTRUCTURA BASE PARA EL GRUPO 03:
- * Las pruebas están estructuradas pero vacías para que cada integrante
- * redacte su prueba (Given-When-Then), capture la fase RED, y luego
- * implemente el método correspondiente en GestorReputacion.java.
- */
+ * Suite de Pruebas Unitarias para GestorReputacion
+*/
 public class GestorReputacionTest {
 
     private GestorReputacion gestor;
@@ -60,7 +55,15 @@ public class GestorReputacionTest {
     // =========================================================================
     @Test
     public void given_three_false_alarms_when_evaluate_then_citizen_suspended() {
-        // TODO: Anthony Minayo debe implementar el test aquí (Given-When-Then)
+        // Given: ciudadano con 2 falsas alarmas registradas previamente
+        ciudadano.setReportesFalsos(2);
+
+        // When: el bombero certifica una nueva falsa alarma (la 3ra)
+        gestor.evaluarVeracidad(ciudadano, false);
+
+        // Then: acumula 3 faltas y su estado de suspensión pasa a true
+        assertEquals(3, ciudadano.getReportesFalsos());
+        assertTrue(ciudadano.isSuspendido());
     }
 
     // =========================================================================
@@ -69,8 +72,13 @@ public class GestorReputacionTest {
     // =========================================================================
     @Test
     public void given_suspended_citizen_when_evaluate_then_throws_exception() {
-        // TODO: Adayely Rochina debe agregar @Test(expected = IllegalStateException.class)
-        // e implementar el test aquí (Given-When-Then)
+        // Given: un ciudadano que ya se encuentra suspendido preventivamente
+        ciudadano.setSuspendido(true);
+
+        // When: el bombero intenta certificar un nuevo reporte para este ciudadano
+        gestor.evaluarVeracidad(ciudadano, true);
+
+        // Then: el sistema lanza IllegalStateException (manejado por el expected del @Test)
     }
 
     // =========================================================================

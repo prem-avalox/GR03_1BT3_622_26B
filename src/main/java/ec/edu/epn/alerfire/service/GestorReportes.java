@@ -38,16 +38,9 @@ public class GestorReportes {
     }
 
     public boolean validarEvidencias(List<Evidencia> evidencias) {
-        if (evidencias == null || evidencias.isEmpty()) {
-            return true; // Es permitido enviar reporte con o sin evidencia visual inmediata
-        }
-        for (Evidencia ev : evidencias) {
-            if (!ev.validar()) {
-                return false;
-            }
-        }
-        return true;
+        return evidencias == null || evidencias.stream().allMatch(Evidencia::validar);
     }
+
 
     public Incendio crearReporte(Ciudadano ciudadano, List<Evidencia> evidencias, String descripcion, Ubicacion ubicacionEspecifica) {
         // Paso 1: Resolver ubicación (vía GPS o manual si fue indicada en mapa)
