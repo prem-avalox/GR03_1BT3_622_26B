@@ -17,6 +17,8 @@ import ec.edu.epn.alerfire.model.NivelConfiabilidad;
  */
 public class GestorReputacion implements IServicioReputacion {
 
+    public static final int LIMITE_FALSAS_ALARMAS = 3;
+
     private final ICiudadanoDAO ciudadanoDAO;
 
     public GestorReputacion() {
@@ -29,13 +31,14 @@ public class GestorReputacion implements IServicioReputacion {
 
     @Override
     public int evaluarVeracidad(Ciudadano ciudadano, boolean esVeridico) {
-        // TODO: Implementar lógica de evaluación de veracidad y reputación (CU5)
-        // Martín: +50 puntos si reporte es verídico.
-        // Nayia: -100 puntos si es falsa alarma (con piso en cero).
-        // Anthony: Suspender preventivamente si acumula 3 falsas alarmas.
-        // Adayely: Lanzar IllegalStateException si el ciudadano ya está suspendido.
-        // María Fernanda: Actualizar en base de datos si ciudadanoDAO != null.
-        return 0;
+        if (!esVeridico) {
+            int faltas = ciudadano.getReportesFalsos() + 1;
+            ciudadano.setReportesFalsos(faltas);
+            if (faltas >= LIMITE_FALSAS_ALARMAS) {
+                ciudadano.setSuspendido(true);
+            }
+        }
+        return ciudadano.getPuntosReputacion();
     }
 
     @Override
