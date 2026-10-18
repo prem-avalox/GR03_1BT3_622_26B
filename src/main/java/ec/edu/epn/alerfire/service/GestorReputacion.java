@@ -18,6 +18,7 @@ import ec.edu.epn.alerfire.model.NivelConfiabilidad;
 public class GestorReputacion implements IServicioReputacion {
 
     private final ICiudadanoDAO ciudadanoDAO;
+    public static final int PENALIZACION_FALSA_ALARMA = 100;
 
     public GestorReputacion() {
         this.ciudadanoDAO = null;
@@ -35,7 +36,15 @@ public class GestorReputacion implements IServicioReputacion {
         // Anthony: Suspender preventivamente si acumula 3 falsas alarmas.
         // Adayely: Lanzar IllegalStateException si el ciudadano ya está suspendido.
         // María Fernanda: Actualizar en base de datos si ciudadanoDAO != null.
-        return 0;
+        if (!esVeridico) {
+            int nuevoPuntaje = Math.max(
+                    0,
+                    ciudadano.getPuntosReputacion() - PENALIZACION_FALSA_ALARMA
+            );
+            ciudadano.setPuntosReputacion(nuevoPuntaje);
+        }
+
+        return ciudadano.getPuntosReputacion();
     }
 
     @Override
