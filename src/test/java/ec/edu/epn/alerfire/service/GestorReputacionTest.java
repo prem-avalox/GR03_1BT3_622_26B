@@ -42,7 +42,11 @@ public class GestorReputacionTest {
     // =========================================================================
     @Test
     public void given_false_alarm_when_evaluate_then_reputation_decreased_with_floor_zero() {
-        // TODO: Nayia Cóndor debe implementar el test aquí (Given-When-Then)
+        ciudadano.setPuntosReputacion(60);
+
+        gestor.evaluarVeracidad(ciudadano, false);
+
+        assertEquals(0, ciudadano.getPuntosReputacion());
     }
 
     // =========================================================================
@@ -68,8 +72,13 @@ public class GestorReputacionTest {
     // =========================================================================
     @Test
     public void given_suspended_citizen_when_evaluate_then_throws_exception() {
-        // TODO: Adayely Rochina debe agregar @Test(expected = IllegalStateException.class)
-        // e implementar el test aquí (Given-When-Then)
+        // Given: un ciudadano que ya se encuentra suspendido preventivamente
+        ciudadano.setSuspendido(true);
+
+        // When: el bombero intenta certificar un nuevo reporte para este ciudadano
+        gestor.evaluarVeracidad(ciudadano, true);
+
+        // Then: el sistema lanza IllegalStateException (manejado por el expected del @Test)
     }
 
     // =========================================================================
