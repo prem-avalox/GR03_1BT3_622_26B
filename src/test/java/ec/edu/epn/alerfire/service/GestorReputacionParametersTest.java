@@ -27,7 +27,14 @@ public class GestorReputacionParametersTest {
     @Parameterized.Parameters
     public static Iterable<Object[]> parameters() {
         List<Object[]> objects = new ArrayList<>();
-        // TODO: Agregar combinaciones de puntajes y niveles esperados
+        objects.add(new Object[]{0, NivelConfiabilidad.BRONCE});
+        objects.add(new Object[]{50, NivelConfiabilidad.BRONCE});
+        objects.add(new Object[]{99, NivelConfiabilidad.BRONCE});
+        objects.add(new Object[]{100, NivelConfiabilidad.PLATA});
+        objects.add(new Object[]{250, NivelConfiabilidad.PLATA});
+        objects.add(new Object[]{299, NivelConfiabilidad.PLATA});
+        objects.add(new Object[]{300, NivelConfiabilidad.ORO});
+        objects.add(new Object[]{500, NivelConfiabilidad.ORO});
         return objects;
     }
 
@@ -38,6 +45,7 @@ public class GestorReputacionParametersTest {
 
     @Test
     public void given_parameters_when_clasificar_nivel_then_ok() {
-        // TODO: Implementar prueba parametrizada (Given-When-Then)
+        GestorReputacion gestor = new GestorReputacion();
+        assertEquals(this.esperado, gestor.clasificarNivelConfiabilidad(this.puntos));
     }
 }

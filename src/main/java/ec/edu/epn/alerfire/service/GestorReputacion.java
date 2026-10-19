@@ -18,6 +18,8 @@ import ec.edu.epn.alerfire.model.NivelConfiabilidad;
 public class GestorReputacion implements IServicioReputacion {
 
     public static final int LIMITE_FALSAS_ALARMAS = 3;
+    public static final int UMBRAL_NIVEL_PLATA = 100;
+    public static final int UMBRAL_NIVEL_ORO = 300;
 
     private final ICiudadanoDAO ciudadanoDAO;
 
@@ -43,11 +45,13 @@ public class GestorReputacion implements IServicioReputacion {
 
     @Override
     public NivelConfiabilidad clasificarNivelConfiabilidad(int puntos) {
-        // TODO: Implementar clasificación por rangos (CU6)
-        // Bronce: < 100 puntos
-        // Plata: 100 a 299 puntos
-        // Oro: >= 300 puntos
-        return null;
+        if (puntos >= UMBRAL_NIVEL_ORO) {
+            return NivelConfiabilidad.ORO;
+        } else if (puntos >= UMBRAL_NIVEL_PLATA) {
+            return NivelConfiabilidad.PLATA;
+        } else {
+            return NivelConfiabilidad.BRONCE;
+        }
     }
 
     @Override
