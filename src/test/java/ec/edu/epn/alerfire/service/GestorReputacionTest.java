@@ -33,7 +33,14 @@ public class GestorReputacionTest {
     // =========================================================================
     @Test
     public void given_veridical_report_when_evaluate_then_reputation_increased() {
-        // TODO: Martín Dávalos debe implementar el test aquí (Given-When-Then)
+        // Given: ciudadano con 100 puntos iniciales (proveniente de setUp)
+        int puntosEsperados = 150;
+
+        // When: el bombero certifica que el reporte fue verídico (esVeridico = true)
+        int resultado = gestor.evaluarVeracidad(ciudadano, true);
+
+        // Then: el ciudadano incrementa su puntaje en +50
+        assertEquals(puntosEsperados, resultado);
     }
 
     // =========================================================================

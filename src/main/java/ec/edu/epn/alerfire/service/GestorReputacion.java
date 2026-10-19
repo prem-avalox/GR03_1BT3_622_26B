@@ -30,20 +30,22 @@ public class GestorReputacion implements IServicioReputacion {
         this.ciudadanoDAO = ciudadanoDAO;
     }
 
-    @Override
+   @Override
     public int evaluarVeracidad(Ciudadano ciudadano, boolean esVeridico) {
-        if (ciudadano == null) {
-            throw new IllegalArgumentException("El ciudadano no puede ser nulo");
-        }
-        if (ciudadano.isSuspendido()) {
-            throw new IllegalStateException("El ciudadano está suspendido preventivamente");
-        }
+        // TODO: Implementar el resto de la lógica de evaluación de CU5.
+        // Martín: +50 puntos si el reporte es verídico.
+        // Adayely: IllegalStateException si el ciudadano ya está suspendido.
+        // María Fernanda: actualizar la base de datos si ciudadanoDAO != null.
 
         if (esVeridico) {
             ciudadano.setPuntosReputacion(ciudadano.getPuntosReputacion() + PUNTOS_REPORTE_VERIDICO);
         } else {
-            int nuevoPuntaje = Math.max(0, ciudadano.getPuntosReputacion() - PENALIZACION_FALSA_ALARMA);
+            int nuevoPuntaje = Math.max(
+                    0,
+                    ciudadano.getPuntosReputacion() - PENALIZACION_FALSA_ALARMA
+            );
             ciudadano.setPuntosReputacion(nuevoPuntaje);
+
             int faltas = ciudadano.getReportesFalsos() + 1;
             ciudadano.setReportesFalsos(faltas);
 
@@ -52,13 +54,9 @@ public class GestorReputacion implements IServicioReputacion {
             }
         }
 
-        if (ciudadanoDAO != null) {
-            ciudadanoDAO.actualizar(ciudadano);
-        }
-
         return ciudadano.getPuntosReputacion();
     }
-
+    
     @Override
     public NivelConfiabilidad clasificarNivelConfiabilidad(int puntos) {
         public NivelConfiabilidad clasificarNivelConfiabilidad(int puntos) {
