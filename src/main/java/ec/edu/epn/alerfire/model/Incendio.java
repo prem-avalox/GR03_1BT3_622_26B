@@ -80,14 +80,22 @@ public class Incendio implements Serializable {
      * Retorna una síntesis detallada del incendio y su estado actual.
      */
     public String obtenerDetalles() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-        String fecha = fechaHora != null ? fechaHora.format(formatter) : "Sin fecha";
-        String dir = ubicacion != null ? ubicacion.getDireccion() : "Ubicación no especificada";
         return String.format("Incendio #%d - Estado: %s | Ubicación: %s | Reportado: %s",
                 id != null ? id : 0,
                 estado != null ? estado.getDescripcion() : "Desconocido",
-                dir,
-                fecha);
+                getDireccionFormateada(),
+                getFechaHoraFormateada());
+    }
+
+    public String getFechaHoraFormateada() {
+        if (fechaHora == null) {
+            return "Sin fecha";
+        }
+        return fechaHora.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+    }
+
+    public String getDireccionFormateada() {
+        return ubicacion != null ? ubicacion.getDireccion() : "Ubicación no especificada";
     }
 
     public void agregarEvidencia(Evidencia evidencia) {
