@@ -53,4 +53,19 @@ public class GestorDespachoTest {
 
         // Then: se espera que lance IllegalStateException
     }
+
+    @Test
+    public void given_in_process_fire_with_station_when_finish_attention_then_fire_extinguished_and_station_available() {
+        // Given: un conato que ya fue despachado con estacionDisponible (ahora ocupada y conato EN_PROCESO_DE_ATENCION)
+        gestor.asignarEstacion(conatoReportado, estacionDisponible);
+        assertFalse(estacionDisponible.isDisponible());
+
+        // When: el bombero en terreno registra la extinción total del conato
+        boolean finalizado = gestor.finalizarAtencion(conatoReportado);
+
+        // Then: el conato cambia a EXTINTO y la estación recupera su disponibilidad (disponible = true)
+        assertTrue(finalizado);
+        assertEquals(EstadoIncendio.EXTINTO, conatoReportado.getEstado());
+        assertTrue(estacionDisponible.isDisponible());
+    }
 }

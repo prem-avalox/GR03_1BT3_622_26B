@@ -39,7 +39,19 @@ public class GestorDespacho implements IServicioDespacho {
 
     @Override
     public boolean finalizarAtencion(Incendio conato) {
-        // TODO: Implementar mediante TDD (HU-02)
+        if (conato == null) {
+            return false;
+        }
+        boolean estadoEnAtencionActiva = conato.getEstado() == EstadoIncendio.EN_PROCESO_DE_ATENCION
+                || conato.getEstado() == EstadoIncendio.BAJO_CONTROL
+                || conato.getEstado() == EstadoIncendio.NO_CONTROLADO;
+        boolean tieneEstacionAsignada = conato.getEstacionAsignada() != null;
+
+        if (estadoEnAtencionActiva && tieneEstacionAsignada) {
+            conato.cambiarEstado(EstadoIncendio.EXTINTO);
+            conato.getEstacionAsignada().setDisponible(true);
+            return true;
+        }
         return false;
     }
 
