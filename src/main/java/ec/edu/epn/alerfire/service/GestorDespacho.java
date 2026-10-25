@@ -28,21 +28,34 @@ public class GestorDespacho implements IServicioDespacho {
         }
 
         vincularEstacionAConato(conato, estacion);
+        sincronizarEstacionEnRepositorio(estacion);
         return true;
+    }
+
+    @Override
+    public boolean finalizarAtencion(Incendio conato) {
+        validarConatoEnAtencion(conato);
+        EstacionBomberos estacion = conato.getEstacionAsignada();
+        conato.cambiarEstado(EstadoIncendio.EXTINTO);
+        estacion.setDisponible(true);
+        sincronizarEstacionEnRepositorio(estacion);
+        return true;
+    }
+
+    @Override
+    public int calcularTiempoArriboMinutos(double distanciaKm) {
+        return 0;
+    }
+
+    @Override
+    public boolean esRespuestaExtendida(double distanciaKm) {
+        return false;
     }
 
     private void vincularEstacionAConato(Incendio conato, EstacionBomberos estacion) {
         conato.setEstacionAsignada(estacion);
         conato.cambiarEstado(EstadoIncendio.EN_PROCESO_DE_ATENCION);
         estacion.setDisponible(false);
-    }
-
-    @Override
-    public boolean finalizarAtencion(Incendio conato) {
-        validarConatoEnAtencion(conato);
-        conato.cambiarEstado(EstadoIncendio.EXTINTO);
-        conato.getEstacionAsignada().setDisponible(true);
-        return true;
     }
 
     private void validarConatoEnAtencion(Incendio conato) {
@@ -59,14 +72,10 @@ public class GestorDespacho implements IServicioDespacho {
         }
     }
 
-    @Override
-    public int calcularTiempoArriboMinutos(double distanciaKm) {
-        // TODO: Implementar mediante TDD Parametrizado (HU-03)
-        return 0;
-    }
 
-    @Override
-    public boolean esRespuestaExtendida(double distanciaKm) {
-        return false;
+    private void sincronizarEstacionEnRepositorio(EstacionBomberos estacion) {
+        if (estacionDAO != null && estacion != null) {
+            estacionDAO.actualizar(estacion);
+        }
     }
 }

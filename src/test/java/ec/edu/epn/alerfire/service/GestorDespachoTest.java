@@ -78,4 +78,19 @@ public class GestorDespachoTest {
 
         // Then: lanza IllegalStateException
     }
+
+    @Test
+    public void given_mock_station_dao_when_assign_station_then_dao_updates_station_persistence() {
+        // Given: un Mock de IEstacionDAO inyectado en GestorDespacho
+        IEstacionDAO mockEstacionDAO = Mockito.mock(IEstacionDAO.class);
+        Mockito.when(mockEstacionDAO.actualizar(estacionDisponible)).thenReturn(true);
+        GestorDespacho gestorConMock = new GestorDespacho(mockEstacionDAO);
+
+        // When: se asigna la estación disponible al conato reportado
+        boolean resultado = gestorConMock.asignarEstacion(conatoReportado, estacionDisponible);
+
+        // Then: se verifica que el gestor delegó la actualización de disponibilidad al DAO
+        assertTrue(resultado);
+        Mockito.verify(mockEstacionDAO, Mockito.times(1)).actualizar(estacionDisponible);
+    }
 }
