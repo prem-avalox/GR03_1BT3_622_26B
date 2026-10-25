@@ -1,8 +1,11 @@
 package ec.edu.epn.alerfire.servlet;
 
+import ec.edu.epn.alerfire.dao.EstacionDAO;
 import ec.edu.epn.alerfire.dao.IncendioDAO;
+import ec.edu.epn.alerfire.model.EstacionBomberos;
 import ec.edu.epn.alerfire.model.EstadoIncendio;
 import ec.edu.epn.alerfire.model.Incendio;
+import ec.edu.epn.alerfire.service.GestorDespacho;
 import ec.edu.epn.alerfire.service.GestorIncendios;
 
 import javax.servlet.ServletException;
@@ -13,30 +16,30 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-/*
- * ============================================================================
- * CONTROLADOR WEB (SERVLET) PARA CASO DE USO 2 (CU2: Actualizar Estado de Incendio)
- * Mapeado a /incendios. Conecta con GestorIncendios y despacha a PantallaActualizarEstado.
- * ============================================================================
- */
-@WebServlet(name = "IncendioServlet", urlPatterns = {"/incendios", "/actualizar-estado"})
+@WebServlet(name = "IncendioServlet", urlPatterns = {"/incendios", "/actualizar-estado", "/incendios/actualizar"})
 public class IncendioServlet extends HttpServlet {
 
     private GestorIncendios gestorIncendios;
+    private GestorDespacho gestorDespacho;
     private IncendioDAO incendioDAO;
+    private EstacionDAO estacionDAO;
 
     @Override
     public void init() throws ServletException {
         super.init();
-        this.gestorIncendios = new GestorIncendios();
         this.incendioDAO = new IncendioDAO();
+        this.estacionDAO = new EstacionDAO();
+        this.gestorIncendios = new GestorIncendios();
+        this.gestorDespacho = new GestorDespacho(this.estacionDAO);
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // abrirPantalla() y mostrarReportesPendientes(lista)
-        List<Incendio> pendientes = gestorIncendios.obtenerReportesPendientes();
+        List<Incendio> pendientes = incendioDAO.listarTodos();
         req.setAttribute("reportesPendientes", pendientes);
+
+        List<EstacionBomberos> estaciones = estacionDAO.listarTodas();
+        req.setAttribute("estacionesBomberos", estaciones);
 
         String idParam = req.getParameter("id");
         if (idParam != null && !idParam.isEmpty()) {
@@ -54,25 +57,63 @@ public class IncendioServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
-        String idStr = req.getParameter("idIncendio");
-        String estadoStr = req.getParameter("nuevoEstado");
-        String observacion = req.getParameter("observacion");
+        String accion = req.getParameter("accion");
 
         try {
-            Long id = Long.parseLong(idStr);
-            EstadoIncendio nuevoEstado = EstadoIncendio.valueOf(estadoStr);
+            if ("despachar".equals(accion)) {
+                // HU-01: Despacho de Estación de Bomberos Disponible a un Conato Activo
+                Long idIncendio = Long.parseLong(req.getParameter("idIncendio"));
+                Long idEstacion = Long.parseLong(req.getParameter("idEstacion"));
 
-            boolean exito = gestorIncendios.actualizarEstado(id, nuevoEstado, null, observacion);
+                Incendio conato = incendioDAO.buscarPorId(idIncendio);
+                EstacionBomberos estacion = estacionDAO.buscarPorId(idEstacion);
 
-            if (exito) {
-                req.getSession().setAttribute("mensajeExito",
-                        "El estado del incendio #" + id + " fue actualizado a [" + nuevoEstado.getDescripcion() + "] exitosamente.");
+                boolean despachado = gestorDespacho.asignarEstacion(conato, estacion);
+                if (despachado) {
+                    incendioDAO.actualizar(conato);
+                    int eta = gestorDespacho.calcularTiempoArriboMinutos(estacion.getDistanciaKmReferencia());
+                    boolean extendida = gestorDespacho.esRespuestaExtendida(estacion.getDistanciaKmReferencia());
+                    String avisoEta = extendida ? " [ALERTA: Respuesta Extendida > 15 min]" : " [Respuesta Operativa Normal]";
+                    req.getSession().setAttribute("mensajeExito",
+                            "[HU-01 / HU-03] Despacho exitoso: " + estacion.getNombre() + " (" + estacion.getCodigo()
+                                    + ") asignada al Conato #" + conato.getId()
+                                    + ". Estado cambiado a EN PROCESO DE ATENCIÓN. ETA estimado: " + eta + " min" + avisoEta + ".");
+                }
+            } else if ("liquidar".equals(accion)) {
+                // HU-02: Liquidación de Emergencia y Liberación Automática de Estación
+                Long idIncendio = Long.parseLong(req.getParameter("idIncendio"));
+                Incendio conato = incendioDAO.buscarPorId(idIncendio);
+                String nombreEstacion = (conato != null && conato.getEstacionAsignada() != null)
+                        ? conato.getEstacionAsignada().getNombre() + " (" + conato.getEstacionAsignada().getCodigo() + ")"
+                        : "N/A";
+
+                boolean finalizado = gestorDespacho.finalizarAtencion(conato);
+                if (finalizado) {
+                    incendioDAO.actualizar(conato);
+                    req.getSession().setAttribute("mensajeExito",
+                            "[HU-02] Liquidación exitosa: El Conato #" + conato.getId()
+                                    + " pasó a estado EXTINTO y la estación " + nombreEstacion
+                                    + " fue liberada automáticamente (DISPONIBLE = true).");
+                }
             } else {
-                req.getSession().setAttribute("mensajeError", "No se pudo actualizar el estado del incendio #" + id);
+                // Flujo tradicional CU2
+                Long id = Long.parseLong(req.getParameter("idIncendio"));
+                EstadoIncendio nuevoEstado = EstadoIncendio.valueOf(req.getParameter("nuevoEstado"));
+                String observacion = req.getParameter("observacion");
+
+                boolean exito = gestorIncendios.actualizarEstado(id, nuevoEstado, null, observacion);
+                if (exito) {
+                    req.getSession().setAttribute("mensajeExito",
+                            "El estado del incendio #" + id + " fue actualizado a [" + nuevoEstado.getDescripcion() + "] exitosamente.");
+                } else {
+                    req.getSession().setAttribute("mensajeError", "No se pudo actualizar el estado del incendio #" + id);
+                }
             }
+        } catch (IllegalStateException | IllegalArgumentException e) {
+            req.getSession().setAttribute("mensajeError", "Operación rechazada por regla de negocio: " + e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
-            req.getSession().setAttribute("mensajeError", "Error al procesar la actualización: " + e.getMessage());
+            req.getSession().setAttribute("mensajeError", "Error al procesar la solicitud: " + e.getMessage());
         }
 
         resp.sendRedirect(req.getContextPath() + "/incendios");

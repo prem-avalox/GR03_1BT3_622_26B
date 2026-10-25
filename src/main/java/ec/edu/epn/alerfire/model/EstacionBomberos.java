@@ -59,4 +59,14 @@ public class EstacionBomberos implements Serializable {
 
     public Ubicacion getUbicacion() { return ubicacion; }
     public void setUbicacion(Ubicacion ubicacion) { this.ubicacion = ubicacion; }
+
+    @Transient
+    public int getEtaMinutos() {
+        return new ec.edu.epn.alerfire.service.GestorDespacho().calcularTiempoArriboMinutos(this.distanciaKmReferencia);
+    }
+
+    @Transient
+    public boolean isRespuestaExtendida() {
+        return new ec.edu.epn.alerfire.service.GestorDespacho().esRespuestaExtendida(this.distanciaKmReferencia);
+    }
 }

@@ -1,11 +1,11 @@
 package ec.edu.epn.alerfire.util;
 
+import ec.edu.epn.alerfire.dao.EstacionDAO;
 import ec.edu.epn.alerfire.dao.IncendioDAO;
 import ec.edu.epn.alerfire.dao.RutaEvacuacionDAO;
 import ec.edu.epn.alerfire.dao.UsuarioDAO;
 import ec.edu.epn.alerfire.dao.ZonaSeguraDAO;
 import ec.edu.epn.alerfire.model.*;
-import org.hibernate.Session;
 
 import java.time.LocalDateTime;
 
@@ -21,9 +21,13 @@ public class DataInitializer {
             IncendioDAO incendioDAO = new IncendioDAO();
             ZonaSeguraDAO zonaSeguraDAO = new ZonaSeguraDAO();
             RutaEvacuacionDAO rutaDAO = new RutaEvacuacionDAO();
+            EstacionDAO estacionDAO = new EstacionDAO();
 
             // Si ya hay usuarios, asumimos que la base ya contiene datos
             if (usuarioDAO.obtenerCiudadanoDefault() != null) {
+                if (estacionDAO.listarTodas().isEmpty()) {
+                    sembrarEstaciones(estacionDAO);
+                }
                 inicializado = true;
                 return;
             }
@@ -35,10 +39,27 @@ public class DataInitializer {
             usuarioDAO.guardar(ciudadano1);
 
             Bombero bombero1 = new Bombero("Sgt. Carlos Mendoza", "carlos.mendoza@bomberosquito.gob.ec", "bombero2026",
-                    "Jefe de Cuadrilla", "Estación B1 - Bellavista");
+                    "Jefe de Cuadrilla", "Estación B1 - Sector Norte");
             usuarioDAO.guardar(bombero1);
 
-            // 2. Crear Zonas Seguras en Quito
+            // 2. Crear Estaciones de Bomberos para HU-01, HU-02 y HU-03
+            EstacionBomberos estProximidad = new EstacionBomberos("B1", "Estación Operativa A (Proximidad Inmediata)", true, 0.5,
+                    new Ubicacion(-0.180000, -78.467000, "Puesto Avanzado Guardaparques"));
+            estacionDAO.guardar(estProximidad);
+
+            EstacionBomberos estUrbana = new EstacionBomberos("B2", "Estación Operativa B (Sector Urbano)", true, 5.0,
+                    new Ubicacion(-0.185000, -78.482000, "Av. Amazonas y República"));
+            estacionDAO.guardar(estUrbana);
+
+            EstacionBomberos estOcupada = new EstacionBomberos("B3", "Estación Operativa C (En Atención Activa)", false, 4.0,
+                    new Ubicacion(-0.174200, -78.468000, "Sector Bellavista"));
+            estacionDAO.guardar(estOcupada);
+
+            EstacionBomberos estLejana = new EstacionBomberos("B4", "Estación Operativa D (Periferia Rural)", true, 10.0,
+                    new Ubicacion(-0.245000, -78.520000, " Reserva Suroriental"));
+            estacionDAO.guardar(estLejana);
+
+            // 3. Crear Zonas Seguras en Quito
             ZonaSegura z1 = new ZonaSegura("Parque La Carolina - Zona de Seguridad Cruz Roja",
                     new Ubicacion(-0.180653, -78.484838, "Av. De los Shyris y Av. Naciones Unidas, Quito"),
                     5000, "Parque Abierto");
@@ -54,25 +75,32 @@ public class DataInitializer {
                     8000, "Instalación Techada");
             zonaSeguraDAO.guardar(z3);
 
-            // 3. Crear Incendios en Quito
+            // 4. Crear Incendios en Quito (incluyendo conato REPORTADO para HU-01 y conato con estación asignada para HU-02)
+            Incendio inc0 = new Incendio("Conato de incendio forestal recién reportado en Bosque Protector Pichincha. Requiere despacho inmediato de estación.",
+                    new Ubicacion(-0.180700, -78.467800, "Bosque Protector Pichincha, Sector Teleférico"),
+                    ciudadano1);
+            inc0.setFechaHora(LocalDateTime.now().minusMinutes(25));
+            inc0.setEstado(EstadoIncendio.REPORTADO);
+            inc0.agregarEvidencia(new Evidencia("images/incendio-guapulo.jpg", TipoEvidencia.FOTO));
+            incendioDAO.guardar(inc0);
+
             Incendio inc1 = new Incendio("Conato de incendio forestal de rápida propagación en laderas de Guápulo con abundante humo.",
                     new Ubicacion(-0.198500, -78.472000, "Laderas de Guápulo, Vía De Los Conquistadores"),
                     ciudadano1);
             inc1.setFechaHora(LocalDateTime.now().minusHours(2));
-            inc1.setEstado(EstadoIncendio.NO_CONTROLADO);
+            inc1.setEstado(EstadoIncendio.REPORTADO);
             inc1.agregarEvidencia(new Evidencia("images/incendio-guapulo.jpg", TipoEvidencia.FOTO));
-            inc1.getHistorial().add(new HistorialEstado(EstadoIncendio.REPORTADO, EstadoIncendio.NO_CONTROLADO, bombero1, inc1,
-                    "Vientos fuertes del oriente complican labores iniciales. Se solicita apoyo de tanqueros."));
             incendioDAO.guardar(inc1);
 
-            Incendio inc2 = new Incendio("Foco de fuego en pastizales secos cerca de la Quebrada Bellavista. Cuadrillas en el punto.",
+            Incendio inc2 = new Incendio("Foco de fuego en pastizales secos cerca de la Quebrada Bellavista. Cuadrilla B3 operando en el punto.",
                     new Ubicacion(-0.174200, -78.468000, "Sector Bellavista Alto, Quebrada"),
                     ciudadano1);
             inc2.setFechaHora(LocalDateTime.now().minusHours(4));
             inc2.setEstado(EstadoIncendio.EN_PROCESO_DE_ATENCION);
+            inc2.setEstacionAsignada(estOcupada);
             inc2.agregarEvidencia(new Evidencia("images/incendio-bellavista.jpg", TipoEvidencia.FOTO));
             inc2.getHistorial().add(new HistorialEstado(EstadoIncendio.REPORTADO, EstadoIncendio.EN_PROCESO_DE_ATENCION, bombero1, inc2,
-                    "Unidad B1 desplegando líneas de ataque con espuma."));
+                    "Estación Operativa C (B3) desplegando líneas de ataque con espuma."));
             incendioDAO.guardar(inc2);
 
             Incendio inc3 = new Incendio("Quema de matorrales en borde de quebrada cerca al Parque Bicentenario. Fuegos aislados.",
@@ -84,7 +112,7 @@ public class DataInitializer {
                     "Línea de contención establecida. Labores de enfriamiento en curso."));
             incendioDAO.guardar(inc3);
 
-            // 4. Crear Rutas de Evacuación precargadas
+            // 5. Crear Rutas de Evacuación precargadas
             Ubicacion origenGonzales = new Ubicacion(-0.195000, -78.478000, "Sector González Suárez");
             RutaEvacuacion r1 = new RutaEvacuacion("Ruta 1: Por Av. 12 de Octubre hacia La Carolina",
                     "Ruta rápida por avenidas principales con calzadas amplias y buena visibilidad.",
@@ -109,5 +137,16 @@ public class DataInitializer {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private static void sembrarEstaciones(EstacionDAO estacionDAO) {
+        estacionDAO.guardar(new EstacionBomberos("B1", "Estación Operativa A (Proximidad Inmediata)", true, 0.5,
+                new Ubicacion(-0.180000, -78.467000, "Puesto Avanzado Guardaparques")));
+        estacionDAO.guardar(new EstacionBomberos("B2", "Estación Operativa B (Sector Urbano)", true, 5.0,
+                new Ubicacion(-0.185000, -78.482000, "Av. Amazonas y República")));
+        estacionDAO.guardar(new EstacionBomberos("B3", "Estación Operativa C (En Atención Activa)", false, 4.0,
+                new Ubicacion(-0.174200, -78.468000, "Sector Bellavista")));
+        estacionDAO.guardar(new EstacionBomberos("B4", "Estación Operativa D (Periferia Rural)", true, 10.0,
+                new Ubicacion(-0.245000, -78.520000, "Reserva Suroriental")));
     }
 }
