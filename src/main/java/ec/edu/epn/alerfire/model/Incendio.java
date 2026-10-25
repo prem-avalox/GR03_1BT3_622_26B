@@ -31,6 +31,9 @@ public class Incendio implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ciudadano_id")
     private Ciudadano ciudadano;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "estacion_id")
+    private EstacionBomberos estacionAsignada;
 
     @OneToMany(mappedBy = "incendio", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Evidencia> evidencias = new ArrayList<>();
@@ -154,5 +157,13 @@ public class Incendio implements Serializable {
 
     public void setHistorial(List<HistorialEstado> historial) {
         this.historial = historial;
+    }
+
+    public EstacionBomberos getEstacionAsignada() {
+        return estacionAsignada;
+    }
+
+    public void setEstacionAsignada(EstacionBomberos estacionAsignada) {
+        this.estacionAsignada = estacionAsignada;
     }
 }

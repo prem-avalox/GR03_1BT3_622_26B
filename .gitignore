@@ -1,5 +1,9 @@
-# Maven
-target/
+# Maven (Permite subir target/*.jar y target/*.war para Jenkins CI y Docker)
+target/GR03_1BT3_622_26B/
+target/maven-archiver/
+target/maven-status/
+target/generated-sources/
+target/generated-test-sources/
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup
@@ -27,3 +31,15 @@ data/
 # OS
 .DS_Store
 Thumbs.db
+
+# Documentación interna y guías de planificación (Excluidas de GitHub)
+*.docx
+*.pdf
+MATRIZ_*.md
+PLANIFICACION_*.md
+CONSULTA_*.md
+GUIA_*.md
+PROPUESTA_*.md
+INFORME_*.md
+BLUEPRINT_*.md
+

@@ -30,5 +30,6 @@
         <mapping class="ec.edu.epn.alerfire.model.ZonaSegura"/>
         <mapping class="ec.edu.epn.alerfire.model.RutaEvacuacion"/>
         <mapping class="ec.edu.epn.alerfire.model.Notificacion"/>
+        <mapping class="ec.edu.epn.alerfire.model.EstacionBomberos"/>
     </session-factory>
 </hibernate-configuration>
