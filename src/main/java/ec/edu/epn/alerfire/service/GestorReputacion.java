@@ -13,7 +13,6 @@ import ec.edu.epn.alerfire.model.NivelConfiabilidad;
  */
 public class GestorReputacion implements IServicioReputacion {
 
-    public static final int LIMITE_FALSAS_ALARMAS = 3;
     public static final int PUNTOS_REPORTE_VERIDICO = 50;
     public static final int PENALIZACION_FALSA_ALARMA = 100;
     public static final int LIMITE_FALSAS_ALARMAS = 3;
@@ -59,7 +58,6 @@ public class GestorReputacion implements IServicioReputacion {
     
     @Override
     public NivelConfiabilidad clasificarNivelConfiabilidad(int puntos) {
-        public NivelConfiabilidad clasificarNivelConfiabilidad(int puntos) {
         // FASE REFACTOR (TDD): Retornos tempranos y uso de constantes semánticas
         if (puntos >= UMBRAL_NIVEL_ORO) {
             return NivelConfiabilidad.ORO;
