@@ -68,4 +68,14 @@ public class GestorDespachoTest {
         assertEquals(EstadoIncendio.EXTINTO, conatoReportado.getEstado());
         assertTrue(estacionDisponible.isDisponible());
     }
+
+    @Test(expected = IllegalStateException.class)
+    public void given_unassigned_reported_fire_when_finish_attention_then_throw_illegal_state_exception() {
+        // Given: conatoReportado permanece en estado REPORTADO y sin estación asignada
+
+        // When: se intenta finalizar la atención directamente sin despacho previo
+        gestor.finalizarAtencion(conatoReportado);
+
+        // Then: lanza IllegalStateException
+    }
 }

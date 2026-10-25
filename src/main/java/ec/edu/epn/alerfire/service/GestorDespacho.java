@@ -39,20 +39,24 @@ public class GestorDespacho implements IServicioDespacho {
 
     @Override
     public boolean finalizarAtencion(Incendio conato) {
+        validarConatoEnAtencion(conato);
+        conato.cambiarEstado(EstadoIncendio.EXTINTO);
+        conato.getEstacionAsignada().setDisponible(true);
+        return true;
+    }
+
+    private void validarConatoEnAtencion(Incendio conato) {
         if (conato == null) {
-            return false;
+            throw new IllegalArgumentException("El conato no puede ser nulo");
         }
         boolean estadoEnAtencionActiva = conato.getEstado() == EstadoIncendio.EN_PROCESO_DE_ATENCION
                 || conato.getEstado() == EstadoIncendio.BAJO_CONTROL
                 || conato.getEstado() == EstadoIncendio.NO_CONTROLADO;
         boolean tieneEstacionAsignada = conato.getEstacionAsignada() != null;
 
-        if (estadoEnAtencionActiva && tieneEstacionAsignada) {
-            conato.cambiarEstado(EstadoIncendio.EXTINTO);
-            conato.getEstacionAsignada().setDisponible(true);
-            return true;
+        if (!estadoEnAtencionActiva || !tieneEstacionAsignada) {
+            throw new IllegalStateException("El conato debe estar en atención activa con estación asignada antes de extinguirse");
         }
-        return false;
     }
 
     @Override
