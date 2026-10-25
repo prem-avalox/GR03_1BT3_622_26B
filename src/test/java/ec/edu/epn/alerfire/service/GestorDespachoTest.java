@@ -43,4 +43,14 @@ public class GestorDespachoTest {
         assertEquals(estacionDisponible, conatoReportado.getEstacionAsignada());
         assertFalse(estacionDisponible.isDisponible());
     }
+
+    @Test(expected = IllegalStateException.class)
+    public void given_busy_station_when_assign_to_fire_then_throw_illegal_state_exception() {
+        // Given: conatoReportado en estado REPORTADO y estacionOcupada con disponible = false
+
+        // When: el comandante intenta asignar la estación ocupada al conato
+        gestor.asignarEstacion(conatoReportado, estacionOcupada);
+
+        // Then: se espera que lance IllegalStateException
+    }
 }

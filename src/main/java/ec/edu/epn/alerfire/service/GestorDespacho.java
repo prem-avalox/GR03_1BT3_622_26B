@@ -17,11 +17,18 @@ public class GestorDespacho implements IServicioDespacho {
 
     @Override
     public boolean asignarEstacion(Incendio conato, EstacionBomberos estacion) {
-        if (conato != null && estacion != null && conato.getEstado() == EstadoIncendio.REPORTADO && estacion.isDisponible()) {
-            vincularEstacionAConato(conato, estacion);
-            return true;
+        if (conato == null || estacion == null) {
+            throw new IllegalArgumentException("El conato y la estación son obligatorios");
         }
-        return false;
+        if (conato.getEstado() != EstadoIncendio.REPORTADO) {
+            throw new IllegalArgumentException("Solo un conato en estado REPORTADO admite despacho");
+        }
+        if (!estacion.isDisponible()) {
+            throw new IllegalStateException("La estación seleccionada no se encuentra disponible");
+        }
+
+        vincularEstacionAConato(conato, estacion);
+        return true;
     }
 
     private void vincularEstacionAConato(Incendio conato, EstacionBomberos estacion) {
