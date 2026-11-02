@@ -5,203 +5,259 @@
 ---
 
 # CATÁLOGO CANÓNICO DE HISTORIAS DE USUARIO — RELEASE 2
-## Gobernanza Cívica (Práctica 2 TDD) y Protección Geoespacial / Evacuación (Tarea 3)
+## Proyecto: AlerFire — Gobernanza Cívica, Alertas Proactivas y Auditoría Operativa
 
-* **Docente:** Prof. Julio Sandobalín, Ph.D.
 * **Grupo:** Grupo 03 (GR2SW)
 * **Integrantes:** Martín Dávalos, Nayia Cóndor, Anthony Minayo, Adayely Rochina, María Fernanda Alquinga
-* **Formato Oficial:** Ficha Story Card de Cátedra (Encabezado `#C4E5F5`, Narrativa en Singular Estricto, 3 Escenarios Gherkin en Singular Estricto y Tareas Técnicas BCE ubicadas inmediatamente después de cada tarjeta).
-* **Roles Canónicos Empleados:** Exclusivamente `Ciudadano` y `Bombero`.
+* **Repositorio Oficial:** [GR03_1BT3_622_26B (GitHub)](https://github.com/prem-avalox/GR03_1BT3_622_26B)
+* **Formato Oficial:** Story Cards de Cátedra (Encabezado `#C4E5F5`, 3 Escenarios Gherkin en Singular Estricto y Tareas BCE).
+* **Roles Canónicos Empleados:** `Ciudadano` y `Bombero`.
 
 ---
 
-## 1. Estructura del Release 2 en el User Story Mapping
+## 1. Distribución del Release 2 por Iteraciones
 
-El **Release 2** formaliza bajo el estándar de Extreme Programming (XP) los módulos implementados en la **Práctica 2 (Reputación y Confiabilidad Cívica)** y en la **Tarea 3 (Zonas Seguras, Rutas de Evacuación y Evidencia Fotográfica)**, junto con la resolución de deuda técnica del selector de despacho:
+El **Release 2** planifica un incremento de **40 Horas Ideales (HI)** equivalentes a **80 Horas Reales (HR)** estructuradas en 2 iteraciones de 1 semana de duración cada una:
 
-* **Iteración 1 del Release 2 (Gobernanza Cívica y Evidencia — 20 HI / 40 HR):**
-  * `HU-R2-01`: Calificación de veracidad de conato y bonificación de reputación (`+50` pts). *(6 HI)*
-  * `HU-R2-02`: Penalización por falsa alarma (`-100` pts) y suspensión de cuenta ciudadana. *(7 HI)*
-  * `HU-R2-03`: Carga de evidencia fotográfica georreferenciada del conato. *(5 HI)*
-* **Iteración 2 del Release 2 (Autoprotección Civil, Evacuación y Selector Reactivo — 20 HI / 40 HR):**
-  * `HU-R2-04`: Consulta cartográfica de zonas seguras y puntos de encuentro activos. *(7 HI)*
-  * `HU-R2-05`: Cálculo de ruta de evacuación con evaluación de nivel de riesgo térmico. *(7 HI)*
-  * `HU-R2-06`: Filtrado reactivo de estaciones disponibles en selector de despacho. *(4 HI)*
+* **Iteración 1 (Release 2) — Feature FT-01: Gobernanza Cívica y Reputación (`20 HI / 40 HR`):**
+  * `HU-R2-01`: Calificación de veracidad de conato y bonificación de reputación (`+50` pts) — *7 HI (14 HR)*
+  * `HU-R2-02`: Penalización por falsa alarma (`-100` pts) y suspensión automática de ciudadano — *7 HI (14 HR)*
+  * `HU-R2-03`: Consulta ciudadana de perfil de confiabilidad e historial de reportes — *6 HI (12 HR)*
+* **Iteración 2 (Release 2) — Feature FT-02: Alertas Comunitarias, Despacho Reactivo y Auditoría (`20 HI / 40 HR`):**
+  * `HU-R2-04`: Bandeja de alertas comunitarias por proximidad y cambios de estado — *7 HI (14 HR)*
+  * `HU-R2-05`: Filtrado reactivo de estaciones disponibles en selector de despacho — *6 HI (12 HR)*
+  * `HU-R2-06`: Conmutación de capa histórica de conatos extintos y bitácora de auditoría — *7 HI (14 HR)*
 
 ---
 
-## 2. Especificación Canónica — Iteración 1 del Release 2 (20 HI / 40 HR)
+## 2. Historias de Usuario — Iteración 1 del Release 2 (20 HI / 40 HR)
 
-### Historia de Usuario HU-R2-01 (Práctica 2 — Reputación Positiva y Confiabilidad)
-
-> **Especificación de Color de Cabecera Oficial:** Celeste `#C4E5F5` (`rgb(196, 229, 245)`).
+### Historia de Usuario HU-R2-01
+* **Pertenece a:** Release 2 — Iteración 1 (Semana 1)
+* **Épica:** `EP-02` Gobernanza Cívica, Alertas Proactivas y Auditoría Operativa
+* **Feature:** `FT-01` Gobernanza Cívica, Reputación y Control de Infractores
 
 <table style="width:100%; border-collapse:collapse; border:1px solid #000000;">
   <tr style="background-color:#C4E5F5; font-weight:bold;">
     <td style="border:1px solid #000000; padding:6px;">Title: HU-R2-01 - Calificación de veracidad de conato y bonificación de reputación</td>
     <td style="border:1px solid #000000; padding:6px;">Priority: Alta</td>
-    <td style="border:1px solid #000000; padding:6px;">Estimate: 6 horas</td>
+    <td style="border:1px solid #000000; padding:6px;">Estimate: 7 horas</td>
   </tr>
 </table>
 
-| **Title:** HU-R2-01 - Calificación de veracidad de conato y bonificación de reputación | **Priority:** Alta | **Estimate:** 6 horas |
+| **Title:** HU-R2-01 - Calificación de veracidad de conato y bonificación de reputación | **Priority:** Alta | **Estimate:** 7 horas |
 | :--- | :--- | :--- |
-| **User Story:**<br/><br/>*Como bombero,*<br/>*quiero calificar como verídico el reporte de incendio emitido por un ciudadano,*<br/>*para incrementar su puntaje de reputación cívica dentro de la plataforma.* | | |
-| **Acceptance Criteria:**<br/><br/>**• Escenario 1 (Bonificación de 50 puntos por reporte verídico):**<br/>&nbsp;&nbsp;**Dado que** el ciudadano posee una cuenta activa con 100 puntos de reputación base,<br/>&nbsp;&nbsp;**Cuando** el bombero confirma la veracidad del conato reportado en terreno,<br/>&nbsp;&nbsp;**Entonces** el sistema adiciona 50 puntos al perfil del ciudadano alcanzando un total de 150 puntos.<br/><br/>**• Escenario 2 (Ascenso automático al nivel de confiabilidad ORO):**<br/>&nbsp;&nbsp;**Dado que** el ciudadano registra un acumulado de 260 puntos de reputación,<br/>&nbsp;&nbsp;**Cuando** el bombero valida un nuevo reporte verídico sumando 50 puntos adicionales,<br/>&nbsp;&nbsp;**Entonces** el sistema actualiza su puntaje a 310 puntos y promueve su rango al nivel `ORO`.<br/><br/>**• Escenario 3 (Rechazo de calificación sobre ciudadano suspendido):**<br/>&nbsp;&nbsp;**Dado que** el ciudadano se encuentra en estado `SUSPENDIDO` dentro del padrón,<br/>&nbsp;&nbsp;**Cuando** el bombero intenta procesar una bonificación sobre dicho perfil,<br/>&nbsp;&nbsp;**Entonces** el sistema lanza una excepción de negocio y conserva inalterado el puntaje. | | |
+| **User Story:**<br/><br/>*Como bombero,*<br/>*quiero calificar como verídico el reporte de incendio emitido por un ciudadano,*<br/>*para incrementar su puntaje de reputación y nivel de confiabilidad en el sistema.* | | |
+| **Acceptance Criteria:**<br/><br/>**• Escenario 1 (Bonificación de 50 puntos por reporte verídico confirmado):**<br/>&nbsp;&nbsp;**Dado que** el ciudadano posee una cuenta activa con 100 puntos de reputación base,<br/>&nbsp;&nbsp;**Cuando** el bombero confirma la veracidad del conato desde el panel de control,<br/>&nbsp;&nbsp;**Entonces** el sistema suma 50 puntos al ciudadano, persiste el nuevo total de 150 puntos y mantiene su nivel en `PLATA`.<br/><br/>**• Escenario 2 (Promoción automática al nivel de confiabilidad ORO):**<br/>&nbsp;&nbsp;**Dado que** el ciudadano registra un puntaje acumulado de 260 puntos de reputación,<br/>&nbsp;&nbsp;**Cuando** el bombero califica como verídico un nuevo reporte suyo adicionando 50 puntos,<br/>&nbsp;&nbsp;**Entonces** el sistema actualiza su saldo a 310 puntos y asciende su categoría al nivel `ORO`.<br/><br/>**• Escenario 3 (Bloqueo de bonificación sobre ciudadano previamente suspendido):**<br/>&nbsp;&nbsp;**Dado que** el ciudadano figura con estado `SUSPENDIDO` en la base de datos,<br/>&nbsp;&nbsp;**Cuando** el bombero intenta registrar una evaluación de veracidad sobre dicho perfil,<br/>&nbsp;&nbsp;**Entonces** el sistema rechaza la operación lanzando una excepción de negocio y conserva intacto el puntaje. | | |
 
 **Descomposición en Tareas Técnicas (BCE):**
-* `T3.1.1` `«boundary»`: Incorporar botón de acción *"Confirmar Veracidad (+50 pts)"* e insignia de nivel de confiabilidad (`BRONCE`, `PLATA`, `ORO`) en la consola `actualizar-estado.jsp`. [2 HI / 4 HR]
-* `T3.1.2` `«control»`: Implementar métodos `evaluarVeracidad` y `determinarNivelConfiabilidad` en `GestorReputacion.java` validados con suite TDD en `GestorReputacionTest.java`. [2 HI / 4 HR]
-* `T3.1.3` `«entity»`: Persistir la actualización del atributo `puntosReputacion` de la entidad `Ciudadano.java` mediante `UsuarioDAO.java` / `ICiudadanoDAO.java`. [2 HI / 4 HR]
-* **Validación de Estimación:** $2 + 2 + 2 = \mathbf{6\text{ HI}}$ ($12\text{ HR}$). Coincide 100% con la Story Card.
+* `T1.1.1` `«boundary»`: Incorporar botón de acción *"Confirmar Veracidad (+50 pts)"* e insignia visual del nivel de confiabilidad (`BRONCE`, `PLATA`, `ORO`) en `actualizar-estado.jsp`. **[2 HI / 4 HR]**
+* `T1.1.2` `«control»`: Crear controlador `ReputacionServlet.java` y completar en `GestorReputacion.java` la validación de estado activo y el enlace con la capa de datos. **[3 HI / 6 HR]**
+* `T1.1.3` `«entity»`: Implementar la interfaz `ICiudadanoDAO` en `UsuarioDAO.java` mediante el método transaccional `actualizar(Ciudadano)` para persistir `puntos_reputacion` en la tabla `ciudadanos`. **[2 HI / 4 HR]**
+* **Validación de Estimación:** $2 + 3 + 2 = \mathbf{7	ext{ HI}}$ ($14	ext{ HR}$).
 
 ---
 
-### Historia de Usuario HU-R2-02 (Práctica 2 — Penalización por Falsa Alarma y Suspensión)
-
-> **Especificación de Color de Cabecera Oficial:** Celeste `#C4E5F5` (`rgb(196, 229, 245)`).
+### Historia de Usuario HU-R2-02
+* **Pertenece a:** Release 2 — Iteración 1 (Semana 1)
+* **Épica:** `EP-02` Gobernanza Cívica, Alertas Proactivas y Auditoría Operativa
+* **Feature:** `FT-01` Gobernanza Cívica, Reputación y Control de Infractores
 
 <table style="width:100%; border-collapse:collapse; border:1px solid #000000;">
   <tr style="background-color:#C4E5F5; font-weight:bold;">
-    <td style="border:1px solid #000000; padding:6px;">Title: HU-R2-02 - Penalización por falsa alarma y suspensión de cuenta ciudadana</td>
+    <td style="border:1px solid #000000; padding:6px;">Title: HU-R2-02 - Penalización por falsa alarma y suspensión automática de ciudadano</td>
     <td style="border:1px solid #000000; padding:6px;">Priority: Alta</td>
     <td style="border:1px solid #000000; padding:6px;">Estimate: 7 horas</td>
   </tr>
 </table>
 
-| **Title:** HU-R2-02 - Penalización por falsa alarma y suspensión de cuenta ciudadana | **Priority:** Alta | **Estimate:** 7 horas |
+| **Title:** HU-R2-02 - Penalización por falsa alarma y suspensión automática de ciudadano | **Priority:** Alta | **Estimate:** 7 horas |
 | :--- | :--- | :--- |
-| **User Story:**<br/><br/>*Como bombero,*<br/>*quiero sancionar el reporte clasificado como falsa alarma,*<br/>*para suspender al ciudadano reincidente que compromete la disponibilidad operativa.* | | |
-| **Acceptance Criteria:**<br/><br/>**• Escenario 1 (Descuento de 100 puntos por primera falsa alarma):**<br/>&nbsp;&nbsp;**Dado que** el ciudadano cuenta con 150 puntos de reputación y 0 reportes falsos previos,<br/>&nbsp;&nbsp;**Cuando** el bombero dictamina que el conato reportado constituye una falsa alarma,<br/>&nbsp;&nbsp;**Entonces** el sistema descuenta 100 puntos dejando el saldo en 50 e incrementa el contador de reportes falsos a 1.<br/><br/>**• Escenario 2 (Cota mínima de cero puntos sin valores negativos):**<br/>&nbsp;&nbsp;**Dado que** el ciudadano dispone únicamente de 40 puntos de reputación vigentes,<br/>&nbsp;&nbsp;**Cuando** el bombero registra la penalización de 100 puntos por falsa alarma,<br/>&nbsp;&nbsp;**Entonces** el sistema trunca el puntaje exactamente en 0 puntos evitando saldos negativos.<br/><br/>**• Escenario 3 (Suspensión automática al alcanzar la tercera reincidencia):**<br/>&nbsp;&nbsp;**Dado que** el ciudadano acumula previamente 2 reportes falsos registrados en su historial,<br/>&nbsp;&nbsp;**Cuando** el bombero sanciona una tercera falsa alarma consecutiva,<br/>&nbsp;&nbsp;**Entonces** el sistema incrementa el contador a 3 y cambia el estado del ciudadano a `SUSPENDIDO`. | | |
+| **User Story:**<br/><br/>*Como bombero,*<br/>*quiero sancionar el reporte catalogado como falsa alarma,*<br/>*para suspender automáticamente al ciudadano reincidente e impedir nuevos envíos fraudulentos.* | | |
+| **Acceptance Criteria:**<br/><br/>**• Escenario 1 (Descuento de 100 puntos por reporte falso con piso en cero):**<br/>&nbsp;&nbsp;**Dado que** el ciudadano dispone de 60 puntos de reputación y 1 reporte falso previo,<br/>&nbsp;&nbsp;**Cuando** el bombero dictamina en la consola que el nuevo conato es una falsa alarma,<br/>&nbsp;&nbsp;**Entonces** el sistema descuenta la penalización truncando el saldo en 0 puntos, incrementa las faltas a 2 y degrada su nivel a `BRONCE`.<br/><br/>**• Escenario 2 (Suspensión automática al acumular la tercera falsa alarma):**<br/>&nbsp;&nbsp;**Dado que** el ciudadano registra 2 reportes falsos previos en su historial,<br/>&nbsp;&nbsp;**Cuando** el bombero sanciona una tercera falsa alarma asociada a su cuenta,<br/>&nbsp;&nbsp;**Entonces** el sistema eleva el contador de faltas a 3 y actualiza el atributo `suspendido` a `true`.<br/><br/>**• Escenario 3 (Denegación de nuevo reporte a ciudadano suspendido):**<br/>&nbsp;&nbsp;**Dado que** el ciudadano posee el indicador `suspendido` activo en su cuenta,<br/>&nbsp;&nbsp;**Cuando** intenta enviar un nuevo formulario de conato en `reportar-incendio.jsp`,<br/>&nbsp;&nbsp;**Entonces** el sistema bloquea el registro y despliega un mensaje notificando la suspensión de la cuenta. | | |
 
 **Descomposición en Tareas Técnicas (BCE):**
-* `T3.2.1` `«boundary»`: Añadir botón *"Reportar Falsa Alarma (-100 pts)"* y alerta visual de bloqueo para cuentas suspendidas en `actualizar-estado.jsp` y `reportar-incendio.jsp`. [2 HI / 4 HR]
-* `T3.2.2` `«control»`: Programar regla de descuento con piso en cero y umbral `LIMITE_FALSAS_ALARMAS = 3` en `GestorReputacion.java` con pruebas parametrizadas en `GestorReputacionParametersTest.java`. [3 HI / 6 HR]
-* `T3.2.3` `«entity»`: Actualizar columnas `puntos_reputacion`, `reportes_falsos` y `suspendido` en la tabla `ciudadanos` mediante `Ciudadano.java` y `UsuarioDAO.java`. [2 HI / 4 HR]
-* **Validación de Estimación:** $2 + 3 + 2 = \mathbf{7\text{ HI}}$ ($14\text{ HR}$). Coincide 100% con la Story Card.
+* `T1.2.1` `«boundary»`: Añadir botón *"Sancionar Falsa Alarma (-100 pts)"* en `actualizar-estado.jsp` y banner de bloqueo de acceso para cuentas suspendidas en `reportar-incendio.jsp`. **[2 HI / 4 HR]**
+* `T1.2.2` `«control»`: Implementar el método `validarAcceso(Ciudadano)` en `GestorReputacion.java` e integrarlo como guarda de seguridad en `ReporteServlet.java` y `ReputacionServlet.java`. **[3 HI / 6 HR]**
+* `T1.2.3` `«entity»`: Persistir las columnas `reportes_falsos` y `suspendido` de `Ciudadano.java` en `UsuarioDAO.java` dentro de una transacción Hibernate. **[2 HI / 4 HR]**
+* **Validación de Estimación:** $2 + 3 + 2 = \mathbf{7	ext{ HI}}$ ($14	ext{ HR}$).
 
 ---
 
-### Historia de Usuario HU-R2-03 (Tarea 1 / Tarea 3 — Evidencia Fotográfica del Conato)
-
-> **Especificación de Color de Cabecera Oficial:** Celeste `#C4E5F5` (`rgb(196, 229, 245)`).
-
-<table style="width:100%; border-collapse:collapse; border:1px solid #000000;">
-  <tr style="background-color:#C4E5F5; font-weight:bold;">
-    <td style="border:1px solid #000000; padding:6px;">Title: HU-R2-03 - Carga de evidencia fotográfica georreferenciada del conato</td>
-    <td style="border:1px solid #000000; padding:6px;">Priority: Media</td>
-    <td style="border:1px solid #000000; padding:6px;">Estimate: 7 horas</td>
-  </tr>
-</table>
-
-| **Title:** HU-R2-03 - Carga de evidencia fotográfica georreferenciada del conato | **Priority:** Media | **Estimate:** 7 horas |
-| :--- | :--- | :--- |
-| **User Story:**<br/><br/>*Como ciudadano,*<br/>*quiero adjuntar una fotografía del foco de humo al formulario de alerta,*<br/>*para respaldar visualmente la existencia real del conato ante el cuerpo de bomberos.* | | |
-| **Acceptance Criteria:**<br/><br/>**• Escenario 1 (Asociación exitosa de archivo de imagen válido):**<br/>&nbsp;&nbsp;**Dado que** el ciudadano completa los datos de ubicación en el formulario de reporte,<br/>&nbsp;&nbsp;**Cuando** selecciona un archivo de imagen con extensión `.jpg` o `.png` y envía la alerta,<br/>&nbsp;&nbsp;**Entonces** el sistema almacena la evidencia vinculada al conato con tipo `FOTO` y marca temporal actual.<br/><br/>**• Escenario 2 (Rechazo de archivo con formato no permitido):**<br/>&nbsp;&nbsp;**Dado que** el ciudadano intenta adjuntar un documento en el campo de evidencia,<br/>&nbsp;&nbsp;**Cuando** carga un archivo cuya extensión no corresponde a una imagen válida,<br/>&nbsp;&nbsp;**Entonces** el método de validación rechaza el adjunto y solicita un formato gráfico compatible.<br/><br/>**• Escenario 3 (Visualización de la fotografía en la consola bomberil):**<br/>&nbsp;&nbsp;**Dado que** un conato registrado posee una evidencia fotográfica almacenada,<br/>&nbsp;&nbsp;**Cuando** el bombero inspecciona el detalle de la emergencia en el panel,<br/>&nbsp;&nbsp;**Entonces** el sistema despliega la miniatura de la fotografía junto a las coordenadas del siniestro. | | |
-
-**Descomposición en Tareas Técnicas (BCE):**
-* `T3.3.1` `«boundary»`: Incorporar control `input type="file"` con soporte `multipart/form-data` en `reportar-incendio.jsp` y previsualización en `mapa.jsp`. [2 HI / 4 HR]
-* `T3.3.2` `«control»`: Procesar el flujo binario de subida y validación de extensión en `ReporteServlet.java` y `GestorReportes.java`. [3 HI / 6 HR]
-* `T3.3.3` `«entity»`: Mapear la entidad `Evidencia.java` (`@Table(name="evidencias")`), enumeración `TipoEvidencia.java` y método `validar()` con relación `@ManyToOne` hacia `Incendio.java`. [2 HI / 4 HR]
-* **Validación de Estimación:** $2 + 3 + 2 = \mathbf{7\text{ HI}}$ ($14\text{ HR}$). Coincide 100% con la Story Card.
-
----
-
-## 3. Especificación Canónica — Iteración 2 del Release 2 (20 HI / 40 HR)
-
-### Historia de Usuario HU-R2-04 (Tarea 3 — Zonas Seguras y Puntos de Encuentro)
-
-> **Especificación de Color de Cabecera Oficial:** Celeste `#C4E5F5` (`rgb(196, 229, 245)`).
+### Historia de Usuario HU-R2-03
+* **Pertenece a:** Release 2 — Iteración 1 (Semana 1)
+* **Épica:** `EP-02` Gobernanza Cívica, Alertas Proactivas y Auditoría Operativa
+* **Feature:** `FT-01` Gobernanza Cívica, Reputación y Control de Infractores
 
 <table style="width:100%; border-collapse:collapse; border:1px solid #000000;">
   <tr style="background-color:#C4E5F5; font-weight:bold;">
-    <td style="border:1px solid #000000; padding:6px;">Title: HU-R2-04 - Consulta cartográfica de zonas seguras y puntos de encuentro</td>
-    <td style="border:1px solid #000000; padding:6px;">Priority: Alta</td>
-    <td style="border:1px solid #000000; padding:6px;">Estimate: 7 horas</td>
-  </tr>
-</table>
-
-| **Title:** HU-R2-04 - Consulta cartográfica de zonas seguras y puntos de encuentro | **Priority:** Alta | **Estimate:** 7 horas |
-| :--- | :--- | :--- |
-| **User Story:**<br/><br/>*Como ciudadano,*<br/>*quiero consultar la ubicación de las zonas seguras habilitadas en el mapa,*<br/>*para identificar el punto de refugio más cercano ante un incendio forestal.* | | |
-| **Acceptance Criteria:**<br/><br/>**• Escenario 1 (Despliegue de zonas seguras con capacidad y tipología):**<br/>&nbsp;&nbsp;**Dado que** existen zonas seguras registradas en la base de datos metropolitana,<br/>&nbsp;&nbsp;**Cuando** el ciudadano accede al módulo de evacuación (`/evacuacion`),<br/>&nbsp;&nbsp;**Entonces** el sistema proyecta en el mapa cada zona segura mostrando su nombre, tipo y capacidad máxima de aforo.<br/><br/>**• Escenario 2 (Diferenciación iconográfica frente a focos de incendio):**<br/>&nbsp;&nbsp;**Dado que** el visor cartográfico presenta simultáneamente conatos activos y puntos de refugio,<br/>&nbsp;&nbsp;**Cuando** el ciudadano examina las capas del mapa interactivo,<br/>&nbsp;&nbsp;**Entonces** el sistema distingue visualmente las zonas seguras mediante marcadores verdes de resguardo.<br/><br/>**• Escenario 3 (Inspección detallada de zona segura al clic):**<br/>&nbsp;&nbsp;**Dado que** los marcadores de refugio están renderizados sobre el mapa Leaflet,<br/>&nbsp;&nbsp;**Cuando** el ciudadano hace clic sobre una zona segura específica,<br/>&nbsp;&nbsp;**Entonces** el sistema abre una tarjeta informativa con la dirección exacta y las coordenadas del albergue. | | |
-
-**Descomposición en Tareas Técnicas (BCE):**
-* `T4.1.1` `«boundary»`: Diseñar vista interactiva de resguardo en `rutas-evacuacion.jsp` y `mapa.jsp` con tarjetas informativas de aforo y marcadores verdes en Leaflet. [2 HI / 4 HR]
-* `T4.1.2` `«control»`: Implementar carga de puntos de refugio en `EvacuacionServlet.java` y `GestorMapa.java` para inyectar la colección en la vista. [3 HI / 6 HR]
-* `T4.1.3` `«entity»`: Programar entidad JPA `ZonaSegura.java` (`@Table(name="zonas_seguras")`) y consultas de recuperación en `ZonaSeguraDAO.java`. [2 HI / 4 HR]
-* **Validación de Estimación:** $2 + 3 + 2 = \mathbf{7\text{ HI}}$ ($14\text{ HR}$). Coincide 100% con la Story Card.
-
----
-
-### Historia de Usuario HU-R2-05 (Tarea 3 — Cálculo de Ruta de Evacuación y Nivel de Riesgo)
-
-> **Especificación de Color de Cabecera Oficial:** Celeste `#C4E5F5` (`rgb(196, 229, 245)`).
-
-<table style="width:100%; border-collapse:collapse; border:1px solid #000000;">
-  <tr style="background-color:#C4E5F5; font-weight:bold;">
-    <td style="border:1px solid #000000; padding:6px;">Title: HU-R2-05 - Cálculo de ruta de evacuación con evaluación de nivel de riesgo</td>
-    <td style="border:1px solid #000000; padding:6px;">Priority: Alta</td>
-    <td style="border:1px solid #000000; padding:6px;">Estimate: 7 horas</td>
-  </tr>
-</table>
-
-| **Title:** HU-R2-05 - Cálculo de ruta de evacuación con evaluación de nivel de riesgo | **Priority:** Alta | **Estimate:** 7 horas |
-| :--- | :--- | :--- |
-| **User Story:**<br/><br/>*Como ciudadano,*<br/>*quiero calcular la ruta de evacuación ordenada según su índice de peligro térmico,*<br/>*para desplazarme hacia una zona segura evitando la proximidad de los focos activos.* | | |
-| **Acceptance Criteria:**<br/><br/>**• Escenario 1 (Ordenamiento de rutas alternativas por menor nivel de riesgo):**<br/>&nbsp;&nbsp;**Dado que** el ciudadano ingresa su coordenada de origen en el buscador de evacuación,<br/>&nbsp;&nbsp;**Cuando** solicita el cálculo de rutas hacia las zonas seguras cercanas,<br/>&nbsp;&nbsp;**Entonces** el sistema evalúa la cercanía de los incendios activos y presenta las rutas ordenadas de menor a mayor riesgo.<br/><br/>**• Escenario 2 (Incremento de riesgo por foco activo a menos de 1 kilómetro):**<br/>&nbsp;&nbsp;**Dado que** una ruta de evacuación pasa a una distancia inferior a 1.0 km de un incendio activo,<br/>&nbsp;&nbsp;**Cuando** el calculador algorítmico ejecuta la ponderación de peligrosidad,<br/>&nbsp;&nbsp;**Entonces** el sistema adiciona una penalización de +6.0 puntos al índice de riesgo de dicho trayecto.<br/><br/>**• Escenario 3 (Trazado poligonal de la ruta segura en el mapa):**<br/>&nbsp;&nbsp;**Dado que** el sistema determina la ruta recomendada con menor puntaje de riesgo,<br/>&nbsp;&nbsp;**Cuando** el ciudadano selecciona la ruta en el listado de resultados,<br/>&nbsp;&nbsp;**Entonces** el visor cartográfico dibuja la polilínea JSON del trayecto desde el origen hasta la zona segura destino. | | |
-
-**Descomposición en Tareas Técnicas (BCE):**
-* `T4.2.1` `«boundary»`: Construir interfaz de solicitud de ruta y renderizado de polilíneas GeoJSON con indicadores de riesgo (escala `0.5` a `10.0`) en `rutas-evacuacion.jsp`. [2 HI / 4 HR]
-* `T4.2.2` `«control»`: Implementar `GestorEvacuacion.java` y `CalculadorRiesgoEvacuacion.java` (`evaluarRiesgo`, `calcularIncrementoPorDistancia`) junto a `EvacuacionServlet.java`. [3 HI / 6 HR]
-* `T4.2.3` `«entity»`: Modelar entidad `RutaEvacuacion.java` (`@Table(name="rutas_evacuacion")`, `calcularDistanciaMinima`, `trazadoJson`) y persistencia en `RutaEvacuacionDAO.java`. [2 HI / 4 HR]
-* **Validación de Estimación:** $2 + 3 + 2 = \mathbf{7\text{ HI}}$ ($14\text{ HR}$). Coincide 100% con la Story Card.
-
----
-
-### Historia de Usuario HU-R2-06 (Refinamiento de Deuda Técnica — Selector de Estaciones Libres)
-
-> **Especificación de Color de Cabecera Oficial:** Celeste `#C4E5F5` (`rgb(196, 229, 245)`).
-
-<table style="width:100%; border-collapse:collapse; border:1px solid #000000;">
-  <tr style="background-color:#C4E5F5; font-weight:bold;">
-    <td style="border:1px solid #000000; padding:6px;">Title: HU-R2-06 - Filtrado reactivo de estaciones disponibles en selector de despacho</td>
+    <td style="border:1px solid #000000; padding:6px;">Title: HU-R2-03 - Consulta ciudadana de perfil de confiabilidad e historial de reportes</td>
     <td style="border:1px solid #000000; padding:6px;">Priority: Media</td>
     <td style="border:1px solid #000000; padding:6px;">Estimate: 6 horas</td>
   </tr>
 </table>
 
-| **Title:** HU-R2-06 - Filtrado reactivo de estaciones disponibles en selector de despacho | **Priority:** Media | **Estimate:** 6 horas |
+| **Title:** HU-R2-03 - Consulta ciudadana de perfil de confiabilidad e historial de reportes | **Priority:** Media | **Estimate:** 6 horas |
 | :--- | :--- | :--- |
-| **User Story:**<br/><br/>*Como bombero,*<br/>*quiero visualizar únicamente las estaciones libres como opciones seleccionables en el formulario de despacho,*<br/>*para evitar intentos fallidos de asignación sobre cuarteles ocupados.* | | |
-| **Acceptance Criteria:**<br/><br/>**• Escenario 1 (Habilitación exclusiva de cuarteles en estado disponible):**<br/>&nbsp;&nbsp;**Dado que** existen estaciones disponibles y estaciones ocupadas en la base de datos,<br/>&nbsp;&nbsp;**Cuando** el bombero despliega el selector de asignación frente a un conato activo,<br/>&nbsp;&nbsp;**Entonces** el sistema habilita únicamente las opciones correspondientes a cuarteles en estado `DISPONIBLE`.<br/><br/>**• Escenario 2 (Bloqueo visual de estación ocupada en el menú desplegable):**<br/>&nbsp;&nbsp;**Dado que** una estación se encuentra asignada atendiendo otra emergencia en curso,<br/>&nbsp;&nbsp;**Cuando** el bombero abre la lista desplegable de cuarteles en la consola,<br/>&nbsp;&nbsp;**Entonces** dicha estación aparece con el atributo `disabled` impidiendo su selección.<br/><br/>**• Escenario 3 (Reactivación inmediata tras liquidación de emergencia):**<br/>&nbsp;&nbsp;**Dado que** el bombero liquida un incendio liberando el cuartel previamente ocupado,<br/>&nbsp;&nbsp;**Cuando** recarga el selector de despacho para atender un nuevo conato,<br/>&nbsp;&nbsp;**Entonces** la estación liberada vuelve a mostrarse como opción seleccionable activa. | | |
+| **User Story:**<br/><br/>*Como ciudadano,*<br/>*quiero consultar mi historial de reportes emitidos junto con mi rango de confiabilidad actual,*<br/>*para verificar el estado de atención de mis alertas y mi reputación cívica.* | | |
+| **Acceptance Criteria:**<br/><br/>**• Escenario 1 (Visualización de medalla de confiabilidad y puntaje vigente):**<br/>&nbsp;&nbsp;**Dado que** el ciudadano ha emitido reportes previamente en la plataforma,<br/>&nbsp;&nbsp;**Cuando** accede a la sección de perfil cívico (`/mi-historial`),<br/>&nbsp;&nbsp;**Entonces** el sistema muestra su puntaje numérico actual, el contador de faltas y la insignia de su nivel (`BRONCE`, `PLATA` u `ORO`).<br/><br/>**• Escenario 2 (Listado cronológico de alertas propias y su estado operativo):**<br/>&nbsp;&nbsp;**Dado que** existen conatos reportados por el ciudadano en la base de datos,<br/>&nbsp;&nbsp;**Cuando** se carga la tabla de seguimiento personal,<br/>&nbsp;&nbsp;**Entonces** el sistema lista únicamente los reportes de dicho ciudadano ordenados por fecha con su estado actual (`REPORTADO`, `EN_PROCESO` o `EXTINTO`).<br/><br/>**• Escenario 3 (Mensaje informativo para ciudadano sin reportes previos):**<br/>&nbsp;&nbsp;**Dado que** el ciudadano aún no ha registrado ningún conato en el sistema,<br/>&nbsp;&nbsp;**Cuando** consulta su vista de historial cívico,<br/>&nbsp;&nbsp;**Entonces** el sistema presenta su puntaje inicial de 100 puntos (`PLATA`) y un aviso indicando que no registra alertas emitidas. | | |
 
 **Descomposición en Tareas Técnicas (BCE):**
-* `T4.3.1` `«boundary»`: Refactorizar el componente `<select name="estacionId">` en `actualizar-estado.jsp` aplicando el atributo condicional `disabled` a cuarteles con `!est.disponible`. [2 HI / 4 HR]
-* `T4.3.2` `«control»`: Ajustar el método de preparación de vista en `IncendioServlet.java` para ordenar primero las estaciones disponibles por menor ETA. [2 HI / 4 HR]
-* `T4.3.3` `«entity»`: Incorporar método de consulta filtrada `obtenerEstacionesDisponibles()` en `EstacionDAO.java` mediante sentencia HQL `WHERE disponible = true`. [2 HI / 4 HR]
-* **Validación de Estimación:** $2 + 2 + 2 = \mathbf{6\text{ HI}}$ ($12\text{ HR}$). Coincide 100% con la Story Card.
+* `T1.3.1` `«boundary»`: Diseñar la vista `mi-historial.jsp` e incorporar su enlace en `navbar.jsp` con tarjetas de puntaje, insignia de rango y tabla de seguimiento. **[2 HI / 4 HR]**
+* `T1.3.2` `«control»`: Desarrollar el controlador `HistorialCiudadanoServlet.java` (`/mi-historial`) que consulte el perfil del ciudadano e invoque `clasificarNivelConfiabilidad`. **[2 HI / 4 HR]**
+* `T1.3.3` `«entity»`: Programar la consulta HQL `listarPorCiudadano(Long ciudadanoId)` en `IncendioDAO.java` ordenando por `fechaHora DESC`. **[2 HI / 4 HR]**
+* **Validación de Estimación:** $2 + 2 + 2 = \mathbf{6	ext{ HI}}$ ($12	ext{ HR}$).
 
 ---
 
-## 4. Tablas Resumen Oficiales del Release 2 (Formato Diapositiva `#FDE7BB`)
+#### Tabla Resumen Oficial — Iteración 1 (Release 2)
 
-#### Iteración 1 (Release 2)
+<table style="width:100%; border-collapse:collapse; border:1px solid #000000;">
+  <tr style="background-color:#FDE7BB; font-weight:bold; text-align:center;">
+    <td style="border:1px solid #000000; padding:6px; width:10%;">No.</td>
+    <td style="border:1px solid #000000; padding:6px; width:65%;">Título</td>
+    <td style="border:1px solid #000000; padding:6px; width:25%;">Estimación</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #000000; padding:6px; text-align:center;">1</td>
+    <td style="border:1px solid #000000; padding:6px;">Calificación de veracidad de conato y bonificación de reputación</td>
+    <td style="border:1px solid #000000; padding:6px; text-align:center;">7 horas</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #000000; padding:6px; text-align:center;">2</td>
+    <td style="border:1px solid #000000; padding:6px;">Penalización por falsa alarma y suspensión automática de ciudadano</td>
+    <td style="border:1px solid #000000; padding:6px; text-align:center;">7 horas</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #000000; padding:6px; text-align:center;">3</td>
+    <td style="border:1px solid #000000; padding:6px;">Consulta ciudadana de perfil de confiabilidad e historial de reportes</td>
+    <td style="border:1px solid #000000; padding:6px; text-align:center;">6 horas</td>
+  </tr>
+  <tr style="background-color:#FDE7BB; font-weight:bold; text-align:center;">
+    <td style="border:1px solid #000000; padding:6px; background-color:#FFFFFF;"></td>
+    <td style="border:1px solid #000000; padding:6px;">Estimado</td>
+    <td style="border:1px solid #000000; padding:6px;">20 horas</td>
+  </tr>
+  <tr style="background-color:#FDE7BB; font-weight:bold; text-align:center;">
+    <td style="border:1px solid #000000; padding:6px; background-color:#FFFFFF;"></td>
+    <td style="border:1px solid #000000; padding:6px;">Real</td>
+    <td style="border:1px solid #000000; padding:6px;">40 horas</td>
+  </tr>
+</table>
 
-| No. | Título | Estimación |
-| :---: | :--- | :---: |
-| 1 | Calificación de veracidad de conato y bonificación de reputación | 6 horas |
-| 2 | Penalización por falsa alarma y suspensión de cuenta ciudadana | 7 horas |
-| 3 | Carga de evidencia fotográfica georreferenciada del conato | 7 horas |
-| | **Estimado** | **20 horas** |
-| | **Real** | **40 horas** |
+---
 
-#### Iteración 2 (Release 2)
+## 3. Historias de Usuario — Iteración 2 del Release 2 (20 HI / 40 HR)
 
-| No. | Título | Estimación |
-| :---: | :--- | :---: |
-| 1 | Consulta cartográfica de zonas seguras y puntos de encuentro | 7 horas |
-| 2 | Cálculo de ruta de evacuación con evaluación de nivel de riesgo | 7 horas |
-| 3 | Filtrado reactivo de estaciones disponibles en selector de despacho | 6 horas |
-| | **Estimado** | **20 horas** |
-| | **Real** | **40 horas** |
+### Historia de Usuario HU-R2-04
+* **Pertenece a:** Release 2 — Iteración 2 (Semana 2)
+* **Épica:** `EP-02` Gobernanza Cívica, Alertas Proactivas y Auditoría Operativa
+* **Feature:** `FT-02` Alertas Comunitarias, Despacho Reactivo y Auditoría Histórica
+
+<table style="width:100%; border-collapse:collapse; border:1px solid #000000;">
+  <tr style="background-color:#C4E5F5; font-weight:bold;">
+    <td style="border:1px solid #000000; padding:6px;">Title: HU-R2-04 - Bandeja de alertas comunitarias por proximidad y cambios de estado</td>
+    <td style="border:1px solid #000000; padding:6px;">Priority: Alta</td>
+    <td style="border:1px solid #000000; padding:6px;">Estimate: 7 horas</td>
+  </tr>
+</table>
+
+| **Title:** HU-R2-04 - Bandeja de alertas comunitarias por proximidad y cambios de estado | **Priority:** Alta | **Estimate:** 7 horas |
+| :--- | :--- | :--- |
+| **User Story:**<br/><br/>*Como ciudadano,*<br/>*quiero visualizar las notificaciones de alerta emitidas por nuevos conatos y cambios de estado,*<br/>*para tomar precauciones oportunas y despejar las vías de acceso bomberil.* | | |
+| **Acceptance Criteria:**<br/><br/>**• Escenario 1 (Generación y visualización de alerta por nuevo incendio):**<br/>&nbsp;&nbsp;**Dado que** se registra un nuevo conato de incendio en un sector metropolitano,<br/>&nbsp;&nbsp;**Cuando** el ciudadano abre el centro de alertas (`/notificaciones`),<br/>&nbsp;&nbsp;**Entonces** el sistema despliega la notificación tipo `NUEVO_INCENDIO` con el sector afectado, fecha/hora y recomendación preventiva.<br/><br/>**• Escenario 2 (Notificación automática tras actualización de estado operativo):**<br/>&nbsp;&nbsp;**Dado que** el bombero cambia el estado de una emergencia a `EN_PROCESO` o `EXTINTO`,<br/>&nbsp;&nbsp;**Cuando** se procesa la transición en el servidor,<br/>&nbsp;&nbsp;**Entonces** el sistema registra y publica un aviso tipo `CAMBIO_ESTADO` visible en la bandeja de notificaciones.<br/><br/>**• Escenario 3 (Filtrado de alertas por tipo de evento):**<br/>&nbsp;&nbsp;**Dado que** la bandeja contiene múltiples avisos de nuevos incendios y cambios de estado,<br/>&nbsp;&nbsp;**Cuando** el ciudadano selecciona un filtro por categoría (`NUEVO_INCENDIO` o `CAMBIO_ESTADO`),<br/>&nbsp;&nbsp;**Entonces** la vista presenta únicamente las notificaciones que coinciden con el tipo elegido. | | |
+
+**Descomposición en Tareas Técnicas (BCE):**
+* `T2.1.1` `«boundary»`: Construir la vista `notificaciones.jsp` con tarjetas cromáticas por tipo de alerta, contador en `navbar.jsp` y filtro rápido por categoría. **[2 HI / 4 HR]**
+* `T2.1.2` `«control»`: Implementar `NotificacionServlet.java` (`/notificaciones`) e invocar `ServicioNotificaciones.notificarCambioEstado` dentro de `IncendioServlet.java` y `GestorDespacho.java`. **[3 HI / 6 HR]**
+* `T2.1.3` `«entity»`: Ampliar `NotificacionDAO.java` con el método HQL `listarPorTipo(String tipo)` sobre la entidad `Notificacion.java`. **[2 HI / 4 HR]**
+* **Validación de Estimación:** $2 + 3 + 2 = \mathbf{7	ext{ HI}}$ ($14	ext{ HR}$).
+
+---
+
+### Historia de Usuario HU-R2-05
+* **Pertenece a:** Release 2 — Iteración 2 (Semana 2)
+* **Épica:** `EP-02` Gobernanza Cívica, Alertas Proactivas y Auditoría Operativa
+* **Feature:** `FT-02` Alertas Comunitarias, Despacho Reactivo y Auditoría Histórica
+
+<table style="width:100%; border-collapse:collapse; border:1px solid #000000;">
+  <tr style="background-color:#C4E5F5; font-weight:bold;">
+    <td style="border:1px solid #000000; padding:6px;">Title: HU-R2-05 - Filtrado reactivo de estaciones disponibles en selector de despacho</td>
+    <td style="border:1px solid #000000; padding:6px;">Priority: Alta</td>
+    <td style="border:1px solid #000000; padding:6px;">Estimate: 6 horas</td>
+  </tr>
+</table>
+
+| **Title:** HU-R2-05 - Filtrado reactivo de estaciones disponibles en selector de despacho | **Priority:** Alta | **Estimate:** 6 horas |
+| :--- | :--- | :--- |
+| **User Story:**<br/><br/>*Como bombero,*<br/>*quiero visualizar únicamente las estaciones disponibles como opciones seleccionables en el selector de despacho,*<br/>*para evitar errores de asignación sobre cuarteles ocupados durante una emergencia.* | | |
+| **Acceptance Criteria:**<br/><br/>**• Escenario 1 (Ordenamiento y habilitación de cuarteles libres por menor ETA):**<br/>&nbsp;&nbsp;**Dado que** existen estaciones de bomberos en estado `DISPONIBLE` en la base de datos,<br/>&nbsp;&nbsp;**Cuando** el bombero abre el menú desplegable de despacho frente a un conato activo,<br/>&nbsp;&nbsp;**Entonces** el sistema presenta habilitadas las estaciones libres ordenadas ascendentemente por menor tiempo de arribo.<br/><br/>**• Escenario 2 (Deshabilitación visual de cuartel ocupado en el selector):**<br/>&nbsp;&nbsp;**Dado que** una estación se encuentra en estado `OCUPADA` atendiendo otro siniestro,<br/>&nbsp;&nbsp;**Cuando** el bombero despliega el selector de asignación en `actualizar-estado.jsp`,<br/>&nbsp;&nbsp;**Entonces** dicha estación aparece bloqueada con el atributo `disabled` impidiendo su selección.<br/><br/>**• Escenario 3 (Aviso preventivo cuando todas las estaciones están ocupadas):**<br/>&nbsp;&nbsp;**Dado que** la totalidad de estaciones registradas se encuentran en estado `OCUPADA`,<br/>&nbsp;&nbsp;**Cuando** el bombero visualiza una emergencia pendiente de despacho,<br/>&nbsp;&nbsp;**Entonces** el sistema inhabilita el botón de envío y muestra una etiqueta indicando espera de liberación de recursos. | | |
+
+**Descomposición en Tareas Técnicas (BCE):**
+* `T2.2.1` `«boundary»`: Refactorizar el `<select name="estacionId">` en `actualizar-estado.jsp` aplicando `disabled` a estaciones ocupadas y bloqueando el botón si no existen unidades libres. **[2 HI / 4 HR]**
+* `T2.2.2` `«control»`: Implementar en `GestorDespacho.java` e `IncendioServlet.java` el ordenamiento automático de estaciones disponibles por menor ETA hacia el conato. **[2 HI / 4 HR]**
+* `T2.2.3` `«entity»`: Programar la consulta HQL `listarDisponibles()` en `EstacionDAO.java` filtrando por `WHERE e.disponible = true`. **[2 HI / 4 HR]**
+* **Validación de Estimación:** $2 + 2 + 2 = \mathbf{6	ext{ HI}}$ ($12	ext{ HR}$).
+
+---
+
+### Historia de Usuario HU-R2-06
+* **Pertenece a:** Release 2 — Iteración 2 (Semana 2)
+* **Épica:** `EP-02` Gobernanza Cívica, Alertas Proactivas y Auditoría Operativa
+* **Feature:** `FT-02` Alertas Comunitarias, Despacho Reactivo y Auditoría Histórica
+
+<table style="width:100%; border-collapse:collapse; border:1px solid #000000;">
+  <tr style="background-color:#C4E5F5; font-weight:bold;">
+    <td style="border:1px solid #000000; padding:6px;">Title: HU-R2-06 - Conmutación de capa histórica de conatos extintos y bitácora de auditoría</td>
+    <td style="border:1px solid #000000; padding:6px;">Priority: Media</td>
+    <td style="border:1px solid #000000; padding:6px;">Estimate: 7 horas</td>
+  </tr>
+</table>
+
+| **Title:** HU-R2-06 - Conmutación de capa histórica de conatos extintos y bitácora de auditoría | **Priority:** Media | **Estimate:** 7 horas |
+| :--- | :--- | :--- |
+| **User Story:**<br/><br/>*Como bombero,*<br/>*quiero activar una capa cartográfica de conatos extintos con su bitácora de cambios de estado,*<br/>*para auditar el historial de intervenciones cerradas sin saturar el mapa de emergencias activas.* | | |
+| **Acceptance Criteria:**<br/><br/>**• Escenario 1 (Ocultamiento por defecto de conatos extintos en el visor principal):**<br/>&nbsp;&nbsp;**Dado que** en la base de datos coexisten incendios activos e incendios en estado `EXTINTO`,<br/>&nbsp;&nbsp;**Cuando** el bombero carga el visor cartográfico (`/mapa`) en modo predeterminado,<br/>&nbsp;&nbsp;**Entonces** el mapa muestra únicamente los focos activos manteniendo oculta la capa histórica.<br/><br/>**• Escenario 2 (Activación bajo demanda de la capa histórica en Leaflet):**<br/>&nbsp;&nbsp;**Dado que** el bombero requiere inspeccionar los siniestros liquidados en el DMQ,<br/>&nbsp;&nbsp;**Cuando** activa el conmutador *"Mostrar Histórico Extinto"* en el control de capas del mapa,<br/>&nbsp;&nbsp;**Entonces** el sistema proyecta marcadores grises en las coordenadas de los conatos extintos.<br/><br/>**• Escenario 3 (Consulta de la bitácora de transiciones de estado del siniestro):**<br/>&nbsp;&nbsp;**Dado que** un conato ha pasado por los estados `REPORTADO`, `EN_PROCESO` y `EXTINTO`,<br/>&nbsp;&nbsp;**Cuando** el bombero abre el detalle de auditoría del incidente,<br/>&nbsp;&nbsp;**Entonces** el sistema exhibe la traza cronológica almacenada en `HistorialEstado` con fecha, estado anterior, estado nuevo y observación. | | |
+
+**Descomposición en Tareas Técnicas (BCE):**
+* `T2.3.1` `«boundary»`: Incorporar control conmutador `L.control.layers` para la capa de extintos en `mapa.jsp` y modal de línea de tiempo de auditoría en `actualizar-estado.jsp`. **[2 HI / 4 HR]**
+* `T2.3.2` `«control»`: Exponer la lista de conatos extintos y su historial de transiciones en `MapaServlet.java`, `GestorMapa.java` y `GestorIncendios.java`. **[3 HI / 6 HR]**
+* `T2.3.3` `«entity»`: Crear `HistorialEstadoDAO.java` y mapear la persistencia de `HistorialEstado.java` en `hibernate.cfg.xml` e `IncendioDAO.java`. **[2 HI / 4 HR]**
+* **Validación de Estimación:** $2 + 3 + 2 = \mathbf{7	ext{ HI}}$ ($14	ext{ HR}$).
+
+---
+
+#### Tabla Resumen Oficial — Iteración 2 (Release 2)
+
+<table style="width:100%; border-collapse:collapse; border:1px solid #000000;">
+  <tr style="background-color:#FDE7BB; font-weight:bold; text-align:center;">
+    <td style="border:1px solid #000000; padding:6px; width:10%;">No.</td>
+    <td style="border:1px solid #000000; padding:6px; width:65%;">Título</td>
+    <td style="border:1px solid #000000; padding:6px; width:25%;">Estimación</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #000000; padding:6px; text-align:center;">1</td>
+    <td style="border:1px solid #000000; padding:6px;">Bandeja de alertas comunitarias por proximidad y cambios de estado</td>
+    <td style="border:1px solid #000000; padding:6px; text-align:center;">7 horas</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #000000; padding:6px; text-align:center;">2</td>
+    <td style="border:1px solid #000000; padding:6px;">Filtrado reactivo de estaciones disponibles en selector de despacho</td>
+    <td style="border:1px solid #000000; padding:6px; text-align:center;">6 horas</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #000000; padding:6px; text-align:center;">3</td>
+    <td style="border:1px solid #000000; padding:6px;">Conmutación de capa histórica de conatos extintos y bitácora de auditoría</td>
+    <td style="border:1px solid #000000; padding:6px; text-align:center;">7 horas</td>
+  </tr>
+  <tr style="background-color:#FDE7BB; font-weight:bold; text-align:center;">
+    <td style="border:1px solid #000000; padding:6px; background-color:#FFFFFF;"></td>
+    <td style="border:1px solid #000000; padding:6px;">Estimado</td>
+    <td style="border:1px solid #000000; padding:6px;">20 horas</td>
+  </tr>
+  <tr style="background-color:#FDE7BB; font-weight:bold; text-align:center;">
+    <td style="border:1px solid #000000; padding:6px; background-color:#FFFFFF;"></td>
+    <td style="border:1px solid #000000; padding:6px;">Real</td>
+    <td style="border:1px solid #000000; padding:6px;">40 horas</td>
+  </tr>
+</table>
