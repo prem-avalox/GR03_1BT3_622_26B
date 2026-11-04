@@ -15,18 +15,27 @@
 
 ---
 
-## 1. Distribución del Release 2 por Iteraciones
+## 1. Distribución del Release 2 por Iteraciones (Épica y Features en Formato HU)
 
-El **Release 2** planifica un incremento de **40 Horas Ideales (HI)** equivalentes a **80 Horas Reales (HR)** estructuradas en 2 iteraciones de 1 semana de duración cada una:
+### Épica Principal del Release: `EP-02`
+* **Título:** Gobernanza Cívica, Alertas Proactivas y Auditoría Operativa
+* **Formato Historia de Usuario:**
+  * **Como** bombero y ciudadano del Distrito Metropolitano de Quito,
+  * **quiero** disponer de un ecosistema integral de reputación ciudadana, alertas comunitarias preventivas y auditoría cartográfica de siniestros,
+  * **para** erradicar el desperdicio operativo por falsas alarmas, salvaguardar vidas en sectores vulnerables y fiscalizar las intervenciones realizadas.
+* **Esfuerzo:** **40 Horas Ideales (80 Horas Reales)** distribuidas en 2 iteraciones de 1 semana.
 
-* **Iteración 1 (Release 2) — Feature FT-01: Gobernanza Cívica y Reputación (`20 HI / 40 HR`):**
-  * `HU-R2-01`: Calificación de veracidad de conato y bonificación de reputación (`+50` pts) — *7 HI (14 HR)*
-  * `HU-R2-02`: Penalización por falsa alarma (`-100` pts) y suspensión automática de ciudadano — *7 HI (14 HR)*
-  * `HU-R2-03`: Consulta ciudadana de perfil de confiabilidad e historial de reportes — *6 HI (12 HR)*
-* **Iteración 2 (Release 2) — Feature FT-02: Alertas Comunitarias, Despacho Reactivo y Auditoría (`20 HI / 40 HR`):**
-  * `HU-R2-04`: Bandeja de alertas comunitarias por proximidad y cambios de estado — *7 HI (14 HR)*
-  * `HU-R2-05`: Filtrado reactivo de estaciones disponibles en selector de despacho — *6 HI (12 HR)*
-  * `HU-R2-06`: Conmutación de capa histórica de conatos extintos y bitácora de auditoría — *7 HI (14 HR)*
+### Features del Release en Formato HU:
+* **Feature FT-01 (Iteración 1: 20 HI / 40 HR):**
+  * *Como* bombero,
+  * *quiero* evaluar la veracidad de los reportes para bonificar a ciudadanos responsables y penalizar a infractores recurrentes,
+  * *para* garantizar la confiabilidad de las alertas ciudadanas y evitar la movilización inútil de motobombas ante falsas alarmas.
+  * *Historias:* `HU-R2-01` (7 HI), `HU-R2-02` (7 HI), `HU-R2-03` (6 HI).
+* **Feature FT-02 (Iteración 2: 20 HI / 40 HR):**
+  * *Como* bombero y ciudadano,
+  * *quiero* recibir notificaciones preventivas de conatos cercanos, despachar únicamente cuarteles libres y conmutar la capa de siniestros extintos,
+  * *para* evacuar oportunamente a la comunidad en riesgo, eliminar asignaciones erróneas en consola y auditar las operaciones cerradas.
+  * *Historias:* `HU-R2-04` (7 HI), `HU-R2-05` (6 HI), `HU-R2-06` (7 HI).
 
 ---
 
