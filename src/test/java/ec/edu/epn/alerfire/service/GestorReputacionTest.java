@@ -94,6 +94,15 @@ public class GestorReputacionTest {
     // =========================================================================
     @Test
     public void given_mock_dao_when_evaluar_veracidad_then_dao_updated_ok() {
-        // TODO: María Fernanda Alquinga debe implementar el test con Mockito aquí
+        // Given: creación del mock para aislar la capa de persistencia
+        ICiudadanoDAO mockDAO = org.mockito.Mockito.mock(ICiudadanoDAO.class);
+        GestorReputacion gestorConPersistencia = new GestorReputacion(mockDAO);
+
+        // When: se evalúa un reporte verídico
+        int resultado = gestorConPersistencia.evaluarVeracidad(ciudadano, true);
+
+        // Then: valida cálculo y comprueba que el mock haya sido invocado con verify
+        assertEquals(150, resultado);
+        org.mockito.Mockito.verify(mockDAO, org.mockito.Mockito.times(1)).actualizar(ciudadano);
     }
 }

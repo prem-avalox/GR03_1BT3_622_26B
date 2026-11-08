@@ -50,6 +50,12 @@ public class GestorReputacion implements IServicioReputacion {
                 ciudadano.setSuspendido(true);
             }
         }
+
+        // [FASE GREEN - María Fernanda Alquinga] Delegación de persistencia al mock ICiudadanoDAO
+        if (this.ciudadanoDAO != null) {
+            this.ciudadanoDAO.actualizar(ciudadano);
+        }
+
         return ciudadano.getPuntosReputacion();
     }
     
