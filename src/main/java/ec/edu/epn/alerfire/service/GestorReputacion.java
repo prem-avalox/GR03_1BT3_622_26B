@@ -31,28 +31,10 @@ public class GestorReputacion implements IServicioReputacion {
 
    @Override
     public int evaluarVeracidad(Ciudadano ciudadano, boolean esVeridico) {
-        // TODO: Implementar el resto de la lógica de evaluación de CU5.
-        // Martín: +50 puntos si el reporte es verídico.
-        // Adayely: IllegalStateException si el ciudadano ya está suspendido.
-        // María Fernanda: actualizar la base de datos si ciudadanoDAO != null.
-
+        // [FASE GREEN - Martín Dávalos] Código mínimo para pasar el test de reporte verídico
         if (esVeridico) {
-            ciudadano.setPuntosReputacion(ciudadano.getPuntosReputacion() + PUNTOS_REPORTE_VERIDICO);
-        } else {
-            int nuevoPuntaje = Math.max(
-                    0,
-                    ciudadano.getPuntosReputacion() - PENALIZACION_FALSA_ALARMA
-            );
-            ciudadano.setPuntosReputacion(nuevoPuntaje);
-
-            int faltas = ciudadano.getReportesFalsos() + 1;
-            ciudadano.setReportesFalsos(faltas);
-
-            if (faltas >= LIMITE_FALSAS_ALARMAS) {
-                ciudadano.setSuspendido(true);
-            }
+            ciudadano.setPuntosReputacion(ciudadano.getPuntosReputacion() + 50);
         }
-
         return ciudadano.getPuntosReputacion();
     }
     
@@ -70,9 +52,9 @@ public class GestorReputacion implements IServicioReputacion {
 
     @Override
     public boolean validarAcceso(Ciudadano ciudadano) {
-        if (ciudadano == null) {
+        if (ciudadano == null || ciudadano.isSuspendido()) {
             return false;
         }
-        return false;
+        return true;
     }
 }
