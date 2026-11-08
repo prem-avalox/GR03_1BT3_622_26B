@@ -77,7 +77,7 @@ public class GestorReputacionTest {
     // TEST 4 (Unitario - Excepciones): Adayely Rochina
     // Requerimiento CU5: Lanzar excepción si el ciudadano ya está suspendido.
     // =========================================================================
-    @Test
+    @Test(expected = IllegalStateException.class)
     public void given_suspended_citizen_when_evaluate_then_throws_exception() {
         // Given: un ciudadano que ya se encuentra suspendido preventivamente
         ciudadano.setSuspendido(true);

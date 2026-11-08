@@ -31,6 +31,11 @@ public class GestorReputacion implements IServicioReputacion {
 
    @Override
     public int evaluarVeracidad(Ciudadano ciudadano, boolean esVeridico) {
+        // [FASE GREEN - Adayely Rochina] Cláusula de guarda para rechazar evaluación si el ciudadano está suspendido
+        if (ciudadano.isSuspendido()) {
+            throw new IllegalStateException("El ciudadano se encuentra suspendido preventivamente.");
+        }
+
         if (esVeridico) {
             ciudadano.setPuntosReputacion(ciudadano.getPuntosReputacion() + PUNTOS_REPORTE_VERIDICO);
         } else {
