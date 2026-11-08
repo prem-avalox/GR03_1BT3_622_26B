@@ -31,7 +31,7 @@ public class GestorReputacion implements IServicioReputacion {
 
    @Override
     public int evaluarVeracidad(Ciudadano ciudadano, boolean esVeridico) {
-        // [FASE GREEN - Adayely Rochina] Cláusula de guarda para rechazar evaluación si el ciudadano está suspendido
+        // [FASE REFACTOR - Adayely Rochina] Aplicación de Guard Clause para validación temprana de invariantes
         if (ciudadano.isSuspendido()) {
             throw new IllegalStateException("El ciudadano se encuentra suspendido preventivamente.");
         }
