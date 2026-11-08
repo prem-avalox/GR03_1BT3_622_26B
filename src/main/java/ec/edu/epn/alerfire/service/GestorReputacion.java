@@ -31,9 +31,12 @@ public class GestorReputacion implements IServicioReputacion {
 
    @Override
     public int evaluarVeracidad(Ciudadano ciudadano, boolean esVeridico) {
-        // [FASE REFACTOR - Martín Dávalos] Aplicación de Replace Magic Literal with Symbolic Constant
         if (esVeridico) {
             ciudadano.setPuntosReputacion(ciudadano.getPuntosReputacion() + PUNTOS_REPORTE_VERIDICO);
+        } else {
+            // [FASE GREEN - Nayia Cóndor] Código mínimo para descontar con piso en cero
+            int nuevoPuntaje = Math.max(0, ciudadano.getPuntosReputacion() - 100);
+            ciudadano.setPuntosReputacion(nuevoPuntaje);
         }
         return ciudadano.getPuntosReputacion();
     }
