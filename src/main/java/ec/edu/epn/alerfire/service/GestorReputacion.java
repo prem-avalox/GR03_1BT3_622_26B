@@ -37,6 +37,13 @@ public class GestorReputacion implements IServicioReputacion {
             // [FASE REFACTOR - Nayia Cóndor] Reemplazo de literal mágico 100 por PENALIZACION_FALSA_ALARMA
             int nuevoPuntaje = Math.max(0, ciudadano.getPuntosReputacion() - PENALIZACION_FALSA_ALARMA);
             ciudadano.setPuntosReputacion(nuevoPuntaje);
+
+            // [FASE GREEN - Anthony Minayo] Incremento de faltas y suspensión al llegar a 3
+            int faltas = ciudadano.getReportesFalsos() + 1;
+            ciudadano.setReportesFalsos(faltas);
+            if (faltas >= 3) {
+                ciudadano.setSuspendido(true);
+            }
         }
         return ciudadano.getPuntosReputacion();
     }
