@@ -128,3 +128,4 @@ GR03_1BT3_622_26B/
 * Dávalos Cedeño Martín Alejandro (martin.davalos@epn.edu.ec)
 * Minayo Gualotuña Anthony Joel (anthony.miayo@epn.edu.ec)
 * Rochina Llumitaxi Adayely Marley (adayely.rochina@epn.edu.ec)
+<!-- Commit de prueba para verificar autoría -->
