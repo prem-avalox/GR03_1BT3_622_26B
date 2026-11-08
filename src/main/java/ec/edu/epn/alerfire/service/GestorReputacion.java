@@ -34,8 +34,8 @@ public class GestorReputacion implements IServicioReputacion {
         if (esVeridico) {
             ciudadano.setPuntosReputacion(ciudadano.getPuntosReputacion() + PUNTOS_REPORTE_VERIDICO);
         } else {
-            // [FASE GREEN - Nayia Cóndor] Código mínimo para descontar con piso en cero
-            int nuevoPuntaje = Math.max(0, ciudadano.getPuntosReputacion() - 100);
+            // [FASE REFACTOR - Nayia Cóndor] Reemplazo de literal mágico 100 por PENALIZACION_FALSA_ALARMA
+            int nuevoPuntaje = Math.max(0, ciudadano.getPuntosReputacion() - PENALIZACION_FALSA_ALARMA);
             ciudadano.setPuntosReputacion(nuevoPuntaje);
         }
         return ciudadano.getPuntosReputacion();
