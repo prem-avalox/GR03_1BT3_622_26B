@@ -51,7 +51,7 @@ public class GestorReputacion implements IServicioReputacion {
             }
         }
 
-        // [FASE GREEN - María Fernanda Alquinga] Delegación de persistencia al mock ICiudadanoDAO
+        // [FASE REFACTOR - María Fernanda Alquinga] Aislamiento de persistencia e inyección de dependencias
         if (this.ciudadanoDAO != null) {
             this.ciudadanoDAO.actualizar(ciudadano);
         }

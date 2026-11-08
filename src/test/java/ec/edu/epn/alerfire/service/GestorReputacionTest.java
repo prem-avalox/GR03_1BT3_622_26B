@@ -105,4 +105,25 @@ public class GestorReputacionTest {
         assertEquals(150, resultado);
         org.mockito.Mockito.verify(mockDAO, org.mockito.Mockito.times(1)).actualizar(ciudadano);
     }
+
+    // =========================================================================
+    // TEST 6 (Con Mocks - Mockito - Verificación never): María Fernanda Alquinga
+    // Requerimiento CU5 / Rúbrica: Al menos 2 pruebas con Mocks.
+    // =========================================================================
+    @Test
+    public void given_mock_dao_when_citizen_suspended_then_dao_never_updated() {
+        // Given: creación del mock y ciudadano que se encuentra suspendido
+        ICiudadanoDAO mockDAO = org.mockito.Mockito.mock(ICiudadanoDAO.class);
+        GestorReputacion gestorConPersistencia = new GestorReputacion(mockDAO);
+        ciudadano.setSuspendido(true);
+
+        // When: se intenta evaluar el reporte (se espera fallo por regla de suspensión)
+        try {
+            gestorConPersistencia.evaluarVeracidad(ciudadano, true);
+            fail("Se esperaba IllegalStateException por ciudadano suspendido");
+        } catch (IllegalStateException e) {
+            // Then: verifica que el DAO jamás fue invocado ante un error de validación
+            org.mockito.Mockito.verify(mockDAO, org.mockito.Mockito.never()).actualizar(ciudadano);
+        }
+    }
 }
