@@ -31,9 +31,9 @@ public class GestorReputacion implements IServicioReputacion {
 
    @Override
     public int evaluarVeracidad(Ciudadano ciudadano, boolean esVeridico) {
-        // [FASE GREEN - Martín Dávalos] Código mínimo para pasar el test de reporte verídico
+        // [FASE REFACTOR - Martín Dávalos] Aplicación de Replace Magic Literal with Symbolic Constant
         if (esVeridico) {
-            ciudadano.setPuntosReputacion(ciudadano.getPuntosReputacion() + 50);
+            ciudadano.setPuntosReputacion(ciudadano.getPuntosReputacion() + PUNTOS_REPORTE_VERIDICO);
         }
         return ciudadano.getPuntosReputacion();
     }
