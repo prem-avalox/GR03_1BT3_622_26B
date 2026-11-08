@@ -60,4 +60,17 @@ public class GestorReputacionParametersTest {
         // Then: el nivel clasificado coincide exactamente con el nivel esperado
         assertEquals(this.esperado, resultado);
     }
+
+    @Test
+    public void given_parameters_when_clasificar_nivel_then_descripcion_valida() {
+        // Given: una instancia de GestorReputacion
+        GestorReputacion gestor = new GestorReputacion();
+
+        // When: se evalúa la clasificación de confiabilidad
+        NivelConfiabilidad resultado = gestor.clasificarNivelConfiabilidad(this.puntos);
+
+        // Then: la descripción institucional no es nula y no está vacía
+        assertNotNull(resultado.getDescripcion());
+        assertFalse(resultado.getDescripcion().trim().isEmpty());
+    }
 }
