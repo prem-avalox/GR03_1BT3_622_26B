@@ -38,10 +38,10 @@ public class GestorReputacion implements IServicioReputacion {
             int nuevoPuntaje = Math.max(0, ciudadano.getPuntosReputacion() - PENALIZACION_FALSA_ALARMA);
             ciudadano.setPuntosReputacion(nuevoPuntaje);
 
-            // [FASE GREEN - Anthony Minayo] Incremento de faltas y suspensión al llegar a 3
+            // [FASE REFACTOR - Anthony Minayo] Reemplazo de literal mágico 3 por constante LIMITE_FALSAS_ALARMAS
             int faltas = ciudadano.getReportesFalsos() + 1;
             ciudadano.setReportesFalsos(faltas);
-            if (faltas >= 3) {
+            if (faltas >= LIMITE_FALSAS_ALARMAS) {
                 ciudadano.setSuspendido(true);
             }
         }
