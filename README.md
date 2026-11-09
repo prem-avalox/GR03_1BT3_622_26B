@@ -82,14 +82,13 @@ En cumplimiento de la rúbrica ($\ge 2$ integraciones en la iteración y $\ge 2$
 ## 🚀 Instrucciones de Ejecución
 
 ### Opción A: Ejecución con Docker / Docker Compose (Recomendada)
-1. Construir e iniciar el contenedor:
+1. Construir e iniciar el contenedor localmente:
    ```bash
    docker-compose up --build -d
    ```
-2. O alternativamente mediante Docker CLI directo:
+2. O descargar y ejecutar directamente la imagen oficial desde Docker Hub:
    ```bash
-   docker build -t alerfire:latest .
-   docker run -d -p 8080:8080 --name alerfire_app alerfire:latest
+   docker run -d -p 8080:8080 --name alerfire_app annthonythony/alerfire:latest
    ```
 3. Abrir en el navegador: `http://localhost:8080`
 
