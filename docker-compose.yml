@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  alerfire-app:
+    image: alerfire:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: alerfire_gr03_container
+    ports:
+      - "8080:8080"
+    environment:
+      - JAVA_OPTS=-Xmx512m
+    restart: unless-stopped
