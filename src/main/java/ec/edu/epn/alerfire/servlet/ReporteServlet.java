@@ -1,11 +1,13 @@
 package ec.edu.epn.alerfire.servlet;
 
+import ec.edu.epn.alerfire.dao.UsuarioDAO;
 import ec.edu.epn.alerfire.model.Ciudadano;
 import ec.edu.epn.alerfire.model.Evidencia;
 import ec.edu.epn.alerfire.model.Incendio;
 import ec.edu.epn.alerfire.model.TipoEvidencia;
 import ec.edu.epn.alerfire.model.Ubicacion;
 import ec.edu.epn.alerfire.service.GestorReportes;
+import ec.edu.epn.alerfire.service.GestorReputacion;
 import ec.edu.epn.alerfire.service.ServicioGPS;
 
 import javax.servlet.ServletException;
@@ -20,7 +22,7 @@ import java.util.List;
 /*
  * ============================================================================
  * CONTROLADOR WEB (SERVLET) PARA CASO DE USO 1 (CU1: Reportar Incendio)
- * Mapeado a /reportar. Conecta con GestorReportes y despacha a PantallaReporte.
+ * Mapeado a /reportar. Conecta con GestorReportes y GestorReputacion (RF-I1-02.3).
  * ============================================================================
  */
 @WebServlet(name = "ReporteServlet", urlPatterns = {"/reportar"})
@@ -28,16 +30,26 @@ public class ReporteServlet extends HttpServlet {
 
     private GestorReportes gestorReportes;
     private ServicioGPS servicioGPS;
+    private UsuarioDAO usuarioDAO;
+    private GestorReputacion gestorReputacion;
 
     @Override
     public void init() throws ServletException {
         super.init();
         this.gestorReportes = new GestorReportes();
         this.servicioGPS = new ServicioGPS();
+        this.usuarioDAO = new UsuarioDAO();
+        this.gestorReputacion = new GestorReputacion(this.usuarioDAO);
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Ciudadano ciudadano = usuarioDAO.obtenerCiudadanoDefault();
+        boolean accesoValido = gestorReputacion.validarAcceso(ciudadano);
+
+        req.setAttribute("cuentaSuspendida", !accesoValido);
+        req.setAttribute("ciudadanoActual", ciudadano);
+
         // abrirPantalla(): Inicializa la vista con la ubicación actual sugerida por GPS
         Ubicacion gps = servicioGPS.obtenerUbicacion();
         req.setAttribute("ubicacionGPS", gps);
@@ -47,6 +59,16 @@ public class ReporteServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
+
+        // RF-I1-02.3: Bloqueo en servidor si el ciudadano se encuentra suspendido
+        Ciudadano ciudadano = usuarioDAO.obtenerCiudadanoDefault();
+        if (!gestorReputacion.validarAcceso(ciudadano)) {
+            req.getSession().setAttribute("mensajeError",
+                    "Acceso bloqueado: su cuenta ha sido suspendida permanentemente por acumular 3 reportes de falsa alarma.");
+            resp.sendRedirect(req.getContextPath() + "/reportar");
+            return;
+        }
+
         String descripcion = req.getParameter("descripcion");
         String latStr = req.getParameter("latitud");
         String lngStr = req.getParameter("longitud");
@@ -65,8 +87,8 @@ public class ReporteServlet extends HttpServlet {
                 evidencias.add(new Evidencia(archivoUrl.trim(), tipo));
             }
 
-            // Invocación al Gestor del caso de uso
-            Incendio reporteCreado = gestorReportes.crearReporte(null, evidencias, descripcion, ubicacion);
+            // Invocación al Gestor del caso de uso vinculando al ciudadano
+            Incendio reporteCreado = gestorReportes.crearReporte(ciudadano, evidencias, descripcion, ubicacion);
 
             if (reporteCreado != null) {
                 req.getSession().setAttribute("mensajeExito",
