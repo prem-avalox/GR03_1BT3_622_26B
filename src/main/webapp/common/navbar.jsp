@@ -44,6 +44,12 @@
                         <i class="bi bi-signpost-2-fill text-warning me-1"></i> Rutas Evacuación (CU4)
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link ${pageContext.request.servletPath == '/mi-historial.jsp' ? 'active fw-bold' : ''}"
+                       href="${pageContext.request.contextPath}/mi-historial">
+                        <i class="bi bi-person-badge-fill text-warning me-1"></i> Mi Perfil Cívico (CU6)
+                    </a>
+                </li>
             </ul>
 
             <div class="d-flex align-items-center text-white">
