@@ -10,7 +10,7 @@
                     Escuela Politécnica Nacional — Metodologías Ágiles de Desarrollo de Software (622_26B)
                 </p>
                 <p class="small text-muted mb-0">
-                    Proyecto GR03_1BT3_622_26B | Arquitectura MVC con Java Servlets, JSP, Hibernate JPA y H2 Database
+                    Proyecto GR03_1BT3_622_26B | Release 2 - Iteración 1: Módulo de Reputación Cívica y Gobernanza (HU-I1-01, HU-I1-02, HU-I1-03)
                 </p>
             </div>
             <div class="col-md-6 text-md-end">
