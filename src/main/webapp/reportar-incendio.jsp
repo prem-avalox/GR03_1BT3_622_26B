@@ -43,8 +43,32 @@
                 </div>
             </div>
 
+            <!-- Alerta de Suspensión Preventiva (HU-I1-02 / CA-03) -->
+            <c:if test="${cuentaSuspendida}">
+                <div class="alert alert-danger shadow-sm border-danger p-4 mb-4" role="alert">
+                    <div class="d-flex align-items-start">
+                        <i class="bi bi-slash-circle-fill text-danger fs-1 me-3 flex-shrink-0"></i>
+                        <div>
+                            <h4 class="alert-heading fw-bold mb-1">
+                                Emisión de Reportes Bloqueada Temporalmente
+                            </h4>
+                            <p class="mb-2">
+                                Estimado ciudadano <strong>${ciudadanoSesion != null ? ciudadanoSesion.nombre : 'Usuario'}</strong>: 
+                                Su cuenta se encuentra <strong>SUSPENDIDA PREVENTIVAMENTE</strong> tras haber acumulado 
+                                <strong>${ciudadanoSesion != null ? ciudadanoSesion.reportesFalsos : 3} falsas alarmas</strong> sancionadas por el Cuerpo de Bomberos.
+                            </p>
+                            <p class="small text-muted mb-0">
+                                Según la política de gobernanza y fiabilidad operativa (Criterio HU-I1-02.3), no es posible ingresar nuevas alertas mientras su cuenta permanezca suspendida. 
+                                Puede consultar los detalles en <a href="${pageContext.request.contextPath}/mi-historial" class="fw-bold text-danger text-decoration-underline">Mi Perfil Cívico e Historial</a>.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </c:if>
+
             <!-- Formulario de Reporte -->
             <form action="${pageContext.request.contextPath}/reportar" method="POST" class="card shadow-sm border-0 bg-white p-4">
+                <fieldset ${cuentaSuspendida ? 'disabled' : ''}>
                 <div class="row g-4">
                     <!-- Columna Izquierda: Información y Evidencia -->
                     <div class="col-md-6">
@@ -124,10 +148,20 @@
                     <a href="${pageContext.request.contextPath}/home" class="btn btn-outline-secondary">
                         <i class="bi bi-arrow-left"></i> Cancelar y Volver
                     </a>
-                    <button type="submit" class="btn btn-danger btn-lg px-4 shadow">
-                        <i class="bi bi-send-fill me-2"></i> Enviar Reporte de Incendio
-                    </button>
+                    <c:choose>
+                        <c:when test="${cuentaSuspendida}">
+                            <button type="button" class="btn btn-secondary btn-lg px-4 shadow" disabled>
+                                <i class="bi bi-slash-circle me-2"></i> Reporte Inhabilitado por Suspensión
+                            </button>
+                        </c:when>
+                        <c:otherwise>
+                            <button type="submit" class="btn btn-danger btn-lg px-4 shadow">
+                                <i class="bi bi-send-fill me-2"></i> Enviar Reporte de Incendio
+                            </button>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
+                </fieldset>
             </form>
         </div>
     </div>
