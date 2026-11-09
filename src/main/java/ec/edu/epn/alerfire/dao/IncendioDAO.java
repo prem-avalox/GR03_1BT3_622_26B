@@ -105,4 +105,24 @@ public class IncendioDAO {
             return Collections.emptyList();
         }
     }
+
+    public List<Incendio> listarPorCiudadano(Long ciudadanoId) {
+        if (ciudadanoId == null) {
+            return Collections.emptyList();
+        }
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Query<Incendio> query = session.createQuery(
+                "FROM Incendio i WHERE i.ciudadano.id = :cid ORDER BY i.fechaHora DESC", Incendio.class);
+            query.setParameter("cid", ciudadanoId);
+            List<Incendio> list = query.list();
+            for (Incendio inc : list) {
+                inc.getEvidencias().size();
+                inc.getHistorial().size();
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Collections.emptyList();
+        }
+    }
 }

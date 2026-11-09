@@ -3,12 +3,13 @@ package ec.edu.epn.alerfire.dao;
 import ec.edu.epn.alerfire.model.Bombero;
 import ec.edu.epn.alerfire.model.Ciudadano;
 import ec.edu.epn.alerfire.model.Usuario;
+import ec.edu.epn.alerfire.service.ICiudadanoDAO;
 import ec.edu.epn.alerfire.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
-public class UsuarioDAO {
+public class UsuarioDAO implements ICiudadanoDAO {
 
     public Usuario guardar(Usuario usuario) {
         Transaction tx = null;
@@ -63,6 +64,31 @@ public class UsuarioDAO {
         } catch (Exception e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    @Override
+    public Ciudadano buscarPorId(Long id) {
+        if (id == null) return null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            return session.get(Ciudadano.class, id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public void actualizar(Ciudadano ciudadano) {
+        if (ciudadano == null) return;
+        Transaction tx = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            tx = session.beginTransaction();
+            session.update(ciudadano);
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null) tx.rollback();
+            e.printStackTrace();
         }
     }
 }
