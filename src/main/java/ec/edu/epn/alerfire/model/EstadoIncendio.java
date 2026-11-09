@@ -5,7 +5,8 @@ public enum EstadoIncendio {
     EN_PROCESO_DE_ATENCION("En Proceso de Atención", "badge bg-warning text-dark"),
     NO_CONTROLADO("No Controlado", "badge bg-danger"),
     BAJO_CONTROL("Bajo Control", "badge bg-info text-dark"),
-    EXTINTO("Extinto", "badge bg-success");
+    EXTINTO("Extinto", "badge bg-success"),
+    FALSA_ALARMA("Falsa Alarma", "badge bg-dark");
 
     private final String descripcion;
     private final String badgeClass;

@@ -35,6 +35,9 @@ public class Incendio implements Serializable {
     @JoinColumn(name = "estacion_id")
     private EstacionBomberos estacionAsignada;
 
+    @Column(name = "calificado_veraz")
+    private boolean calificadoVeraz = false;
+
     @OneToMany(mappedBy = "incendio", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Evidencia> evidencias = new ArrayList<>();
 
@@ -173,5 +176,13 @@ public class Incendio implements Serializable {
 
     public void setEstacionAsignada(EstacionBomberos estacionAsignada) {
         this.estacionAsignada = estacionAsignada;
+    }
+
+    public boolean isCalificadoVeraz() {
+        return calificadoVeraz;
+    }
+
+    public void setCalificadoVeraz(boolean calificadoVeraz) {
+        this.calificadoVeraz = calificadoVeraz;
     }
 }
