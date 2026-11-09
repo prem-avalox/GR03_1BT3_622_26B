@@ -40,10 +40,12 @@
     <div class="card shadow-sm border-0 mb-4 bg-white">
         <div class="card-body p-4">
             <div class="d-flex flex-wrap gap-2 align-items-center mb-2">
-                <span class="badge bg-danger fs-6">Incremento XP: Despacho Bomberil</span>
+                <span class="badge bg-danger fs-6">Incremento XP: Despacho Bomberil y Gobernanza</span>
                 <span class="badge bg-primary">HU-01: Despacho de Estación</span>
                 <span class="badge bg-success">HU-02: Liquidación y Liberación</span>
                 <span class="badge bg-warning text-dark">HU-03: Estimación de ETA</span>
+                <span class="badge bg-info text-dark">HU-I1-01: Veracidad (+50 pts)</span>
+                <span class="badge bg-danger">HU-I1-02: Sanción Falsa Alarma (-100 pts)</span>
             </div>
             <h2 class="fw-bold text-dark mb-1">
                 <i class="bi bi-truck-flatbed text-danger me-2"></i> Centro de Comando: Despacho de Estaciones y Control de Emergencias
@@ -228,6 +230,7 @@
                         <th>Estado Actual</th>
                         <th>Estación Asignada</th>
                         <th>Despachar Estación (HU-01)</th>
+                        <th>Gobernanza y Veracidad (HU-I1-01 / HU-I1-02)</th>
                         <th class="text-end pe-4">Liquidar / Actualizar (HU-02)</th>
                     </tr>
                     </thead>
@@ -237,7 +240,7 @@
                             <td class="ps-4 fw-bold">#${inc.id}</td>
                             <td>
                                 <div class="fw-semibold text-dark">${inc.ubicacion.direccion}</div>
-                                <small class="text-muted d-block" style="max-width: 280px;">
+                                <small class="text-muted d-block" style="max-width: 250px;">
                                     ${inc.descripcion}
                                 </small>
                             </td>
@@ -263,7 +266,7 @@
                                 <form action="${pageContext.request.contextPath}/incendios" method="POST" class="d-flex gap-1 align-items-center">
                                     <input type="hidden" name="accion" value="despachar">
                                     <input type="hidden" name="idIncendio" value="${inc.id}">
-                                    <select name="idEstacion" class="form-select form-select-sm" style="min-width: 210px;" required>
+                                    <select name="idEstacion" class="form-select form-select-sm" style="min-width: 200px;" required>
                                         <c:forEach var="est" items="${estacionesBomberos}">
                                             <option value="${est.id}">
                                                 ${est.codigo} - ${est.nombre} (ETA: ${est.etaMinutos}m | ${est.disponible ? 'DISP' : 'OCUPADA'})
@@ -274,6 +277,65 @@
                                         <i class="bi bi-send-fill me-1"></i> Despachar
                                     </button>
                                 </form>
+                            </td>
+                            <td>
+                                <!-- Control de Evaluación y Veracidad (HU-I1-01 / HU-I1-02) -->
+                                <div class="d-flex align-items-center justify-content-between mb-1">
+                                    <span class="small fw-bold text-dark">
+                                        <i class="bi bi-person me-1"></i> ${inc.ciudadano != null ? inc.ciudadano.nombre : 'Anónimo'}
+                                    </span>
+                                    <c:if test="${inc.ciudadano != null}">
+                                        <span class="badge ${inc.ciudadano.suspendido ? 'bg-danger' : 'bg-light text-primary border'}">
+                                            ${inc.ciudadano.puntosReputacion} pts ${inc.ciudadano.suspendido ? '• SUSP' : ''}
+                                        </span>
+                                    </c:if>
+                                </div>
+                                <div>
+                                    <c:choose>
+                                        <c:when test="${inc.calificadoVeraz}">
+                                            <span class="badge bg-success px-2 py-1">
+                                                <i class="bi bi-check-circle-fill me-1"></i> Verídico Recompensado (+50 pts)
+                                            </span>
+                                        </c:when>
+                                        <c:when test="${inc.estado.name() == 'FALSA_ALARMA'}">
+                                            <span class="badge bg-dark text-danger px-2 py-1 border border-danger">
+                                                <i class="bi bi-x-circle-fill me-1"></i> Falsa Alarma Sancionada (-100 pts)
+                                            </span>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <div class="d-flex gap-1 align-items-center">
+                                                <!-- Botón HU-I1-01: Calificar Veraz -->
+                                                <form action="${pageContext.request.contextPath}/reputacion" method="POST" class="d-inline">
+                                                    <input type="hidden" name="accion" value="calificar_veraz">
+                                                    <input type="hidden" name="idIncendio" value="${inc.id}">
+                                                    <button type="submit"
+                                                            class="btn btn-sm btn-outline-success text-nowrap"
+                                                            title="Otorgar +50 pts por reporte verídico (requiere conato en atención o extinto)"
+                                                            ${(inc.estado.name() == 'REPORTADO' || (inc.ciudadano != null && inc.ciudadano.suspendido)) ? 'disabled' : ''}>
+                                                        <i class="bi bi-check2-circle me-1"></i> +50 Veraz
+                                                    </button>
+                                                </form>
+
+                                                <!-- Botón HU-I1-02: Sancionar Falsa Alarma -->
+                                                <form action="${pageContext.request.contextPath}/reputacion" method="POST" class="d-inline">
+                                                    <input type="hidden" name="accion" value="sancionar_falsa_alarma">
+                                                    <input type="hidden" name="idIncendio" value="${inc.id}">
+                                                    <button type="submit"
+                                                            class="btn btn-sm btn-outline-danger text-nowrap"
+                                                            onclick="return confirm('¿Confirmar sanción de FALSA ALARMA para el conato #${inc.id}? Se penalizará con -100 pts al ciudadano.');"
+                                                            title="Sancionar falsa alarma (-100 pts)">
+                                                        <i class="bi bi-shield-x me-1"></i> -100 Falsa
+                                                    </button>
+                                                </form>
+                                            </div>
+                                            <c:if test="${inc.estado.name() == 'REPORTADO'}">
+                                                <small class="text-muted d-block mt-1" style="font-size: 0.72rem;">
+                                                    * Despache una unidad para verificar veracidad
+                                                </small>
+                                            </c:if>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </div>
                             </td>
                             <td class="text-end pe-4">
                                 <div class="d-flex justify-content-end gap-1">
