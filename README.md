@@ -79,14 +79,18 @@ En cumplimiento de la rúbrica ($\ge 2$ integraciones en la iteración y $\ge 2$
 
 ---
 
-## 🚀 Instrucciones de Ejecución
+## 🚀 Imágenes en Docker Hub e Instrucciones de Ejecución
+
+### Contenedores Oficiales en Docker Hub
+* **Imagen Docker de Jenkins (Servidor de CI):** [`https://hub.docker.com/r/annthonythony/jenkins-alerfire-gr03`](https://hub.docker.com/r/annthonythony/jenkins-alerfire-gr03)
+* **Imagen Docker de la Aplicación Web (AlerFire Release 2):** [`https://hub.docker.com/r/annthonythony/alerfire`](https://hub.docker.com/r/annthonythony/alerfire)
 
 ### Opción A: Ejecución con Docker / Docker Compose (Recomendada)
 1. Construir e iniciar el contenedor localmente:
    ```bash
    docker-compose up --build -d
    ```
-2. O descargar y ejecutar directamente la imagen oficial desde Docker Hub:
+2. O descargar y ejecutar directamente la imagen oficial de la aplicación desde Docker Hub:
    ```bash
    docker run -d -p 8080:8080 --name alerfire_app annthonythony/alerfire:latest
    ```
